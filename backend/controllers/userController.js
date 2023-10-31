@@ -4,10 +4,10 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 exports.register = async (req, res, next) => {
-    const { username, password, email } = req.body;
+    const { email, password, username } = req.body;
 
     // validation - if user somehow submits empty strings, their post req will be rejected.
-    if (!username || !password || !email) {
+    if (!email || !username || !password) {
         //manual error creation
         return res.status(400).json({
             message:
@@ -21,22 +21,22 @@ exports.register = async (req, res, next) => {
     // VALIDATION - check if email is already registered
     const emailCheck = await User.findOne({ email: email });
     if (emailCheck) {
-        return res.status(400).json({ message: "email is already registered" });
+        return res.status(400).json({ email: "Email is already registered" });
     }
 
     // VALIDATION - check if username is taken
     const usernameCheck = await User.findOne({ username: username })
     if (usernameCheck) {
-        return res.status(400).json({ message: "that username has been taken" });
+        return res.status(400).json({ username: "Username has been taken" });
     }
 
     try {
         const hashed = await bcrypt.hash(password, saltRounds);
 
         const newUser = new User({
-            username: username,
-            password: hashed,
             email: email,
+            password: hashed,
+            username: username,
         });
         await newUser.save();
     } catch (error) {
@@ -47,8 +47,8 @@ exports.register = async (req, res, next) => {
 
     res.status(200).json({
         message: "User registered successfully",
+        email,
         username,
         password,
-        email,
     });
 };
