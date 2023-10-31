@@ -1,5 +1,11 @@
+"use client"
+import Register from "@/components/Register"
+import { useState } from "react"
+
 export default function Home() {
   return (
-    <div>Hello World</div>
+    <div>
+      <Register />
+    </div>
   )
 }
