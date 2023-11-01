@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+// REGISTER A NEW USER
 exports.register = async (req, res, next) => {
     const { username, password, email } = req.body;
 
@@ -21,13 +22,19 @@ exports.register = async (req, res, next) => {
     // VALIDATION - check if email is already registered
     const emailCheck = await User.findOne({ email: email });
     if (emailCheck) {
-        return res.status(400).json({ message: "email is already registered" });
+        return res.status(400).json({
+            status: 400,
+            message: "email is already registered",
+        });
     }
 
     // VALIDATION - check if username is taken
-    const usernameCheck = await User.findOne({ username: username })
+    const usernameCheck = await User.findOne({ username: username });
     if (usernameCheck) {
-        return res.status(400).json({ message: "that username has been taken" });
+        return res.status(400).json({
+            status: 400,
+            message: "that username has been taken",
+        });
     }
 
     try {
@@ -41,6 +48,7 @@ exports.register = async (req, res, next) => {
         await newUser.save();
     } catch (error) {
         return res.status(500).json({
+            status: res.status,
             message: "a server error has occured.",
         });
     }
@@ -51,4 +59,14 @@ exports.register = async (req, res, next) => {
         password,
         email,
     });
+};
+
+// USER LOGIN
+exports.login = async (req, res, next) => {
+    res.json({message: "login route"})
+}
+
+// SERVE USER DATA
+exports.getUserArea = async (req, res, next) => {
+    res.json({ message: "user data route" });
 };

@@ -11,7 +11,7 @@ const userRoutes = require("./routes/userRoutes")
 
 app.use(
     cors({
-        origin: "http://localhost:3001",
+        // origin: "http://localhost:3001",
     })
 );
 app.use(morgan("dev"));
