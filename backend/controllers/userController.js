@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 exports.register = async (req, res, next) => {
-    const { email, password, username } = req.body;
+    const { email, username, password } = req.body;
 
     // validation - if user somehow submits empty strings, their post req will be rejected.
     if (!email || !username || !password) {
