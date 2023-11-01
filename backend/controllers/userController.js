@@ -44,7 +44,7 @@ exports.register = async (req, res, next) => {
         const newUser = new User({
             username: username,
             password: hashed,
-            email: email,
+            email: email
         });
         await newUser.save();
     } catch (error) {
@@ -91,7 +91,7 @@ exports.login = async (req, res, next) => {
         }
         // if a user logs in successfully, they are given a jwt via generateToken()
         if (result) {
-            user.token = generateToken();
+            user.token = generateToken(user.id);
             return res.status(200).json({
                 status: 200,
                 message: "user successfully logged in",
