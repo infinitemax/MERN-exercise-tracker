@@ -91,7 +91,7 @@ exports.login = async (req, res, next) => {
         }
         // if a user logs in successfully, they are given a jwt via generateToken()
         if (result) {
-            user.token = generateToken(user.id);
+            user.token = generateToken(user._id);
             return res.status(200).json({
                 status: 200,
                 message: "user successfully logged in",
