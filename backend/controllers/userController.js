@@ -88,6 +88,7 @@ exports.login = async (req, res, next) => {
     })
     
     // I have got this far - I have a problem with the need to use an await when finding and saving the user - it's not allowed in the inner callback to bcrypt, so I'm reworking it, but need to start again tomorrow.
+    // TODO - turn this into an async somehow...
 
 
 
