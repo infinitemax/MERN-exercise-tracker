@@ -7,10 +7,10 @@ const jwt = require("jsonwebtoken");
 
 // REGISTER A NEW USER
 exports.register = async (req, res, next) => {
-    const { username, password, email } = req.body;
+    const { email, username, password } = req.body;
 
     // validation - if user somehow submits empty strings, their post req will be rejected.
-    if (!username || !password || !email) {
+    if (!email || !username || !password) {
         //manual error creation
         return res.status(400).json({
             message:
@@ -28,6 +28,7 @@ exports.register = async (req, res, next) => {
             status: 400,
             message: "email is already registered",
         });
+
     }
 
     // VALIDATION - check if username is taken
@@ -43,9 +44,10 @@ exports.register = async (req, res, next) => {
         const hashed = await bcrypt.hash(password, saltRounds); // does this need a callback to deal with errors?
 
         const newUser = new User({
-            username: username,
+
+            email: email,
             password: hashed,
-            email: email
+            username: username,
         });
         await newUser.save();
     } catch (error) {
@@ -57,9 +59,9 @@ exports.register = async (req, res, next) => {
 
     res.status(200).json({
         message: "User registered successfully",
+        email,
         username,
         password,
-        email,
     });
 };
 

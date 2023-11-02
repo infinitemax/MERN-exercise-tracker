@@ -1,26 +1,26 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3001';
+const url = process.env.NEXT_PUBLIC_API_ENDPOINT || "http://localhost:3001";
 
 export class ApiClient {
-  constructor() {
-   
-  }
+  constructor() {}
 
-  async register(email, username, password) {
+  async register(email, password, username) {
     try {
       const response = await axios.post(`${url}/register`, {
         email,
-        username,
         password,
+        username,
       });
-      return response.data;
+      return response;
     } catch (error) {
-      console.error('Error registering:', error);
-      throw error;
+      console.error("Error registering:", error);
+      const errorMessage = error.response
+        ? error.response.data
+        : { message: error.message };
+      throw errorMessage;
     }
   }
-
 }
 
 export default new ApiClient();
