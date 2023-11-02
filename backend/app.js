@@ -7,6 +7,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const createError = require("http-errors");
 const userRoutes = require("./routes/userRoutes")
+const cookieParser = require("cookie-parser")
 
 
 app.use(
@@ -17,7 +18,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({ extended: false }));
-
+app.use(cookieParser());
     
 try {
     mongoose.connect(process.env.MONGODB_URI, {

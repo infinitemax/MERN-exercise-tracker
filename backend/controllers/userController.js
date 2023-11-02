@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser")
 
 // REGISTER A NEW USER
 exports.register = async (req, res, next) => {
@@ -68,6 +69,7 @@ exports.login = async (req, res, next) => {
 
     // find user
     const user = await User.findOne({username: username})
+
     if (!user) {
         return res.status(404).json({
             status: 404,
@@ -77,21 +79,11 @@ exports.login = async (req, res, next) => {
 
     //check password
     const hash = user.password
-
-    const result = await new Promise((resolve, reject) => {
-        bcrypt.compare(password, hash, function(err, result) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(result)
-            }
-    })
-    
-    // I have got this far - I have a problem with the need to use an await when finding and saving the user - it's not allowed in the inner callback to bcrypt, so I'm reworking it, but need to start again tomorrow.
-    // TODO - turn this into an async somehow...
-
-
-
+    bcrypt.compare(password, hash, function(err, result) {
+        if (err) {
+            console.log(err)
+            return
+        }
         if (!result) {
             return res.status(401).json({
                 status: 401,
@@ -100,19 +92,13 @@ exports.login = async (req, res, next) => {
         }
         // if a user logs in successfully, they are given a jwt via generateToken()
         if (result) {
-            // TODO - FINISH UPDATING DB USER WITH TOKEN
-            // update user entry in db
-            // find by id
-            // const updateUser = await User.find(user._id)
-            // access the promise
-            // save (use save() rather than update, apparently)
-            
-            user.token = generateToken(user._id);
+            const token = generateToken(user._id);
+            console.log(token)
 
+            // generate token, then send that as a json.
             return res.status(200).json({
                 status: 200,
                 message: "user successfully logged in",
-                user
             })
         }
     })
@@ -130,5 +116,23 @@ const generateToken = (id) => {
 
 // SERVE USER DATA
 exports.getUserArea = async (req, res, next) => {
-    res.json({ message: "user data route" });
+    // user gets access
+    const userId = req.tokenResult.id
+
+    try {
+        // find the user on the basis of the ID we get form the token payload.
+    const user = await User.findById(userId) // I think this can be refactored so that it happens in authMiddleware, with that returning a user, rather than id. Bu then maybe that's unncessary, as we need to access the db anyway to get their records
+
+    if (!user) {
+        console.log("not authorised")
+    }
+
+    res.json({ 
+        message: "user data route", 
+        otherMessage: "testing jwt middleware",
+        userId: userId,
+        user
+    });} catch (error) {
+        console.log(error)
+    }
 };
