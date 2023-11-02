@@ -3,7 +3,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser")
+
 
 // REGISTER A NEW USER
 exports.register = async (req, res, next) => {
@@ -93,10 +93,15 @@ exports.login = async (req, res, next) => {
         // if a user logs in successfully, they are given a jwt via generateToken()
         if (result) {
             const token = generateToken(user._id);
-            console.log(token)
+            console.log(`token is ${token}`)
 
-            // generate token, then send that as a json.
-            return res.status(200).json({
+            // save token as a cookie, returns status and message
+            
+            return res.cookie("token", token, {
+                httpOnly: true,
+                // left out secure: .... here
+            })
+            .status(200).json({
                 status: 200,
                 message: "user successfully logged in",
             })
@@ -114,7 +119,8 @@ const generateToken = (id) => {
     })
 }
 
-// SERVE USER DATA
+
+// SERVE USER DATA - PROTECTED
 exports.getUserArea = async (req, res, next) => {
     // user gets access
     const userId = req.tokenResult.id
@@ -136,3 +142,12 @@ exports.getUserArea = async (req, res, next) => {
         console.log(error)
     }
 };
+
+exports.logout = async (_, res) => {
+    return res
+        .clearCookie("token")
+        .status(200)
+        .json({
+            message: "User has been logged out."
+        })
+}

@@ -11,10 +11,16 @@ const protect = async (req, res, next) => {
         // verify the user
         // send that user to the function/route that called this middleware
     console.log("1")
-    const authHeader = req.headers["authorization"]
-    const token = authHeader && authHeader.split(" ")[1] // sets token where authHeader exists (using conditional approach)
+
+    // *****this is where token is as a bearer header, but we're going to try with cookies
+    // const authHeader = req.headers["authorization"]
+    // const token = authHeader && authHeader.split(" ")[1] // sets token where authHeader exists (using conditional approach)
+
+    // *****using cookies
+    const token = req.cookies.token;
+
     console.log("2")
-    if (token == null) {
+    if (!token) {
         return res.status(401).json({
             status: 401,
             message: "no token"
