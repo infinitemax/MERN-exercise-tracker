@@ -7,3 +7,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+/* tailwind.css or your CSS file */
+.opacity-gradient {
+  @apply bg-gradient-to-b;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0.5));
+}
