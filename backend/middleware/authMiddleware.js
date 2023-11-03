@@ -10,7 +10,7 @@ const protect = async (req, res, next) => {
         // get the token that was sent
         // verify the user
         // send that user to the function/route that called this middleware
-    console.log("1")
+
 
     // *****this is where token is as a bearer header, but we're going to try with cookies
     // const authHeader = req.headers["authorization"]
@@ -19,16 +19,16 @@ const protect = async (req, res, next) => {
     // *****using cookies
     const token = req.cookies.token;
 
-    console.log("2")
+
     if (!token) {
         return res.status(401).json({
             status: 401,
             message: "no token"
         })
     }
-    console.log("3")
+
     try {await jwt.verify(token, process.env.JWT_SECRET, (err, tokenResult) => {
-        console.log("4")
+
         if (err) {
             console.log("token is not valid")
             return res.status(403).json({
@@ -39,8 +39,8 @@ const protect = async (req, res, next) => {
         // if we have a valid token, set req.tokenResult as the tokenResult object we get back from jwt.verify. Going to log this as I don't quite understand what it is - answer: it's the payload that we included when we created the token.
         console.log(`user object from jwt.verify is:`)
         
-        console.log(tokenResult)
-        req.tokenResult = tokenResult
+        console.log(tokenResult.id)
+        req.userId = tokenResult.id
         
 
         next()
