@@ -12,13 +12,11 @@ export class ApiClient {
         password,
         username,
       });
-      return response;
+      return response;  // Return the response to the caller
     } catch (error) {
-      console.error("Error registering:", error);
-      const errorMessage = error.response
-        ? error.response.data
-        : { message: error.message };
-      throw errorMessage;
+      console.error('Error in registration:', error);
+      // Here we throw the error to let the caller handle it as per its own logic
+      throw error;
     }
   }
 }
