@@ -52,12 +52,55 @@ exports.deleteActivity = async (req, res) => {
     
     console.log(`we are going to delete id: ${activityToDelete}`)
 
-    // find the activity and delete it
+    try {// find the activity and delete it
     const deleted = await Activity.findByIdAndDelete(activityToDelete).exec()
     
     res.send(deleted)
     // does the user activity array need updating? No! Mega.
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({
+            status: 500,
+            message: "activity could not be deleted due to an internal server error, please try again later."
+        })
+    }
     
 }
 
 // UPDATE AN ACTIVITY - PROTECTED
+exports.updateActivity = async (req, res) => {
+    // to use this endpoint, activity _id must be in uri as a param, and the body must contain a json like this:
+    /*
+    {
+        "update" : {
+            "[property to update]" : "[new value]"
+        }
+    }
+    */
+
+    const activityToUpdate = req.params.id // id sent via params, but is there a better approach?
+    const updatedInfo = req.body.update
+
+    try {
+        const updatedActivity = await Activity.updateOne({ _id: activityToUpdate }, updatedInfo)
+        
+        if(updatedActivity.acknowledged) {
+            return res.status(200).json({
+                status: 200,
+                message: "Update successful",
+                updatedActivity
+            })
+        } else {
+            return res.status(500).json({
+                status: 500,
+                message: "update unsuccessful due to server error"
+            })
+        }
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "update unsuccessful due to server error"
+        })
+    }
+}

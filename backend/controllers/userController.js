@@ -124,7 +124,7 @@ exports.getUserArea = async (req, res) => {
     const userId = req.userId;
 
     try {
-        // find the user on the basis of the ID we get form the token payload.
+        // find the user on the basis of the ID we get from the token payload.
         // note use of populate method - this populates the user's activities array
         const user = await User.findById(userId).populate("activities");
 
@@ -151,6 +151,21 @@ exports.getUserArea = async (req, res) => {
 };
 
 // SHOW ALL USERS - PROTECTED
+exports.allUsers = async (req, res) => {
+    try {
+        const allUsers = await User.find();
+        return res.status(200).json({
+            users: allUsers
+        })
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({
+            status: 500,
+            message: "Internal server error"
+        })
+    }
+}
+
 
 // DELETE A USER -- NOT YET WORKING!
 exports.deleteUser = async (req, res) => {
