@@ -36,7 +36,7 @@ exports.register = async (req, res, next) => {
     if (usernameCheck) {
         return res.status(400).json({
             status: 400,
-            message: "that username has been taken",
+            message: "Username already taken",
         });
     }
 

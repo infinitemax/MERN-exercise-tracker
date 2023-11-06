@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import apiClient from "@/apiClient";
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-    username: "",
-  });
+  const [errors, setErrors] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
+  const router = useRouter();
   // State variables to track the validity of input fields
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -29,6 +26,7 @@ export default function Register() {
       email: "",
       password: "",
       username: "",
+      global: ""
     });
     setIsEmailValid(true);
     setIsPasswordValid(true);
@@ -82,7 +80,9 @@ export default function Register() {
 
 
       // Start API call
+     
       setIsSubmitting(true);
+      
 
       try {
          // Call to register API endpoint
@@ -94,24 +94,42 @@ export default function Register() {
           setSuccessMessage(response.data.message);
           console.log("response.data.message:", response.data.message);
           console.log("Registration successful:", response.data);
-        } else if (response.status === 400) {
-          console.log('Response data:', response.data);
-          setErrors(response.data);
-          console.log('Errors state:', errors);
-        } else {
-          // Handle unexpected status codes
-          const errorMessage = 'Unexpected server response';
-          console.error("Registration error:", errorMessage);
-          setErrors({ message: errorMessage });
+          router.push('/login');}
+         } catch (error) {
+          console.error('Registration error:', error);
+      
+          
+          if (error.response) {
+           
+            if (error.response.status === 400) {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                global: error.response.data.message,
+              }));
+            } else {
+              setErrors((prevErrors) => ({
+                ...prevErrors,
+                global: 'An unexpected error occurred. Please try again later.',
+              }));
+            }
+          } else if (error.request) {
+            // The request was made but no response was received
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              global: 'No response from server. Please check your network connection.',
+            }));
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              global: 'An error occurred while setting up the registration request.',
+            }));
+          };
+        } finally {
+          setIsSubmitting(false);
         }
-      } catch (error) {
-        // Handle network errors or other unexpected errors
-        console.error('Registration error:', error);
-        setErrors(error); 
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
+      };
+    
 
     // Rendering the registration form
   return (
@@ -138,8 +156,9 @@ export default function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
           />
-          {errors.email && <p className="text-red-500">{errors.email}</p>}
+         
         </div>
 
         <div className="relative mb-4">
@@ -156,9 +175,10 @@ export default function Register() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            autoComplete="username"
           />
            {/* {console.log('errors.username:', errors.username)} */}
-          {errors.username && <p className="text-red-500">{errors.username}</p>}
+           {errors.username && <p className="text-red-500">{errors.username}</p>}
         </div>
 
         <div className="relative mb-4">
