@@ -7,6 +7,7 @@ const {
     logout,
     deleteUser,
     allUsers,
+    updateUser,
 } = require("../controllers/userController");
 const {
     addActivity,
@@ -21,12 +22,13 @@ router.post("/login", login); // log in a user
 router.get("/logout", protect, logout); // log a user out
 router.get("/all-users", protect, allUsers)
 router.delete("/myarea/delete-user", protect, deleteUser); // delete a user
+router.patch("/myarea", protect, updateUser) // update a user
 
 
 //activities
 router.get("/myarea", protect, getUserArea); // serve a user their data
 router.post("/myarea", protect, addActivity); // add new activities to a user's record
-router.patch("/myarea/:id", protect, updateActivity)// update an activity
+// router.patch("/myarea/:id", protect, updateActivity)// update an activity
 router.delete("/myarea/:id", protect, deleteActivity); // delete an activity
 
 

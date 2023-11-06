@@ -93,14 +93,14 @@ exports.updateActivity = async (req, res) => {
         } else {
             return res.status(500).json({
                 status: 500,
-                message: "update unsuccessful due to server error"
+                message: "update unsuccessful due to server error - update was not acknowledged"
             })
         }
         
     } catch (error) {
         return res.status(500).json({
             status: 500,
-            message: "update unsuccessful due to server error"
+            message: "max is cool"
         })
     }
 }

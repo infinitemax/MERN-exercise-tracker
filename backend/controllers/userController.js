@@ -167,7 +167,47 @@ exports.allUsers = async (req, res) => {
 }
 
 
-// DELETE A USER -- NOT YET WORKING!
+// UPDATE A USER - PROTECTED
+exports.updateUser = async (req, res) => {
+    // to use this endpoint, user id is taken from the middleware, and the body must contain a json like this:
+    /*
+    {
+        "update" : {
+            "[property to update]" : "[new value]"
+        }
+    }
+    */
+    const userId = req.userId
+    const updatedInfo = req.body.update
+    try {
+        const updatedUser = await User.updateOne(
+            {_id: userId}, updatedInfo
+        )
+        
+        if (updatedUser.acknowledged) {
+            const user = await User.find({_id: userId})
+
+            return res.status(200).json({
+                status: 200,
+                message: "Update successful",
+                user
+            })
+        } else {
+            return res.status(500).json({
+                status: 500,
+                message: "update unsuccessful due to server error"
+            })
+        }
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: "update unsuccessful due to server error"
+        })
+    }
+}
+
+// DELETE A USER - PROTECTED
 exports.deleteUser = async (req, res) => {
     // get user id from cookie
     const userToDelete = req.userId;
