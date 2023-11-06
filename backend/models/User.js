@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema(
             require: true,
         },
         token: String,
+        testActivities: [{type: String}],
         activities: [{ type: mongoose.Schema.Types.ObjectId, ref: "Activity"}],
     },
     { timestamps: true } // added to give us a created/edited timestamp
