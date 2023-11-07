@@ -28,7 +28,7 @@ router.patch("/myarea", protect, updateUser) // update a user
 //activities
 router.get("/myarea", protect, getUserArea); // serve a user their data
 router.post("/myarea", protect, addActivity); // add new activities to a user's record
-// router.patch("/myarea/:id", protect, updateActivity)// update an activity
+router.patch("/myarea/:id", protect, updateActivity)// update an activity
 router.delete("/myarea/:id", protect, deleteActivity); // delete an activity
 
 

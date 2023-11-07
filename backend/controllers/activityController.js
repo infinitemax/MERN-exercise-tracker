@@ -56,7 +56,7 @@ exports.deleteActivity = async (req, res) => {
     const deleted = await Activity.findByIdAndDelete(activityToDelete).exec()
     
     res.send(deleted)
-    // does the user activity array need updating? No! Mega.
+    // does the user activity array need updating? YES! TODO...
     } catch (error) {
         console.error(error)
         return res.status(500).json({

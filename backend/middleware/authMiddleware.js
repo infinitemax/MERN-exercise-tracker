@@ -16,6 +16,7 @@ const protect = async (req, res, next) => {
 
 
     if (!token) {
+        console.log("no token");
         return res.status(401).json({
             status: 401,
             message: "no token"
