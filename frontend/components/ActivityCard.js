@@ -7,13 +7,10 @@ const ActivityCard = (props) => {
     let title = props.activity.toUpperCase()
 
 
-    // get date properly
-
+    // get date and format using date-fns
     const date = new Date(props.createdAt)
-    console.log(date)
-
     const formattedDate = format(date, "dd/MM/yyyy")
-    console.log(formattedDate)
+
 
 
   return (
