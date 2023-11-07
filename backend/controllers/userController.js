@@ -123,6 +123,14 @@ exports.getUserArea = async (req, res) => {
     // user gets access
     const userId = req.userId;
 
+    console.log("hello")
+    if (!userId) {
+        return res.status(401).json({
+            status: 401,
+            message: "Unauthorised"
+        })
+    }
+
     try {
         // find the user on the basis of the ID we get from the token payload.
         // note use of populate method - this populates the user's activities array
@@ -139,7 +147,7 @@ exports.getUserArea = async (req, res) => {
         return res.status(200).json({
             message: "user data route",
             username: user.username,
-            activities: user.activities,
+            user,
         });
     } catch (error) {
         console.log(error);
