@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import apiClient from "@/apiClient";
 import { useRouter } from "next/navigation";
+import ActivityCard from "./ActivityCard";
 
 
 const Navbar = () => {
@@ -12,6 +13,7 @@ const Navbar = () => {
     const router = useRouter();
 
     const [navbar, setNavbar] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
   
 
     const logoutHandler = async () => {

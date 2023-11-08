@@ -20,7 +20,7 @@ const ActivityCard = (props) => {
         <p className='font-light'>Duration: {props.duration}</p>
         <p className='mx-2'> | </p>
         <p className='font-light'>Intensity: {props.intensity}</p>
-        <p className='absolute right-4'>{formattedDate}</p>
+        <p className='absolute right-4 font-light'>{formattedDate}</p>
 
     </div>
   )
