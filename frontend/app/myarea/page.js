@@ -3,6 +3,7 @@ import React from "react";
 import Dashboard from "@/components/Dashboard";
 import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function MyAreaPage() {
     const [data, setData] = useState();
@@ -15,8 +16,6 @@ export default function MyAreaPage() {
         console.log("how many times?")
     }, []);
 
-
-
     // load up the user's data
     const getUserData = async () => {
         try {
@@ -25,12 +24,15 @@ export default function MyAreaPage() {
             // if we don't get back 200, the user is not auth'd - set state and send message
             if (response.status !== 200) {
                 setIsAuthorised(false);
+                setIsLoading(false);
+                return
             }
 
             // add user's activities to the activities variable
             setData(response.data.user.activities)
 
             setIsLoading(false);
+            return
         } catch (error) {
             console.log(error);
         }
@@ -38,6 +40,8 @@ export default function MyAreaPage() {
 
     return (
         <div>
+            
+
             {isLoading && <h2>Loading...</h2>}
             {!isLoading && (
                 <>
@@ -50,7 +54,9 @@ export default function MyAreaPage() {
                             .
                         </h2>
                     )}
-                    {isAuthorised && <Dashboard 
+                    {isAuthorised && <Navbar />}
+                    {isAuthorised && 
+                    <Dashboard 
                         data={data}
                         hello="hello"
                     />}
