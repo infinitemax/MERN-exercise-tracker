@@ -52,10 +52,25 @@ export class ApiClient {
       {withCredentials: true})
       return response;
     }catch (error) {
-      console.log(error)
-      return error
+      console.log(error.response)
+      return error.response
     }
   } 
+
+
+  async logOut() {
+   
+   console.log("logging out")
+   
+    try {
+      const response = await axios.get(`${url}/logout`,
+      {withCredentials: true})
+      return response;
+    } catch (error) {
+      console.log(error.response)
+      return error.response
+    }
+  }
 }
 
 export default new ApiClient();
