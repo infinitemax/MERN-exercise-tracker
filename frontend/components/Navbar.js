@@ -23,6 +23,15 @@ const Navbar = () => {
         return router.push("/logged-out");
     };
 
+    const closeRecorder = async () => {
+        // a function to close the recorder modal when it's open, using the X
+        if (isRecording) {
+            setIsRecording(false);
+        }
+
+        return
+    }
+
     return (
         <>
             <nav className="w-full bg-slate-300 fixed top-0 left-0 right-0 z-10">
@@ -110,7 +119,9 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-            {isRecording && <ActivityRecorder />}
+            {isRecording && <ActivityRecorder 
+                closeRecorder={closeRecorder}
+            />}
         </>
     );
 };

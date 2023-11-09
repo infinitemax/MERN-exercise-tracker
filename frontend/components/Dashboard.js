@@ -9,7 +9,7 @@ const Dashboard = (props) => {
 
     return (
         <div className="pt-20">
-            <h1 className="text-3xl text-slate-800 text-center pb-12 pt-8">{username}'s dashboard</h1>
+            <h1 className="test-test text-3xl text-slate-800 text-center pb-12 pt-8">{username}'s dashboard</h1>
 
             {props.data.map((activity) => {
                 return <ActivityCard {...activity} 
