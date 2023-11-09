@@ -46,7 +46,7 @@ body {
 
 .activityBtns input[type="radio"] {
     opacity: 0.011;
-    z-index: 100;
+    z-index: 2;
 }
 
 .activityBtns input[type="radio"]:checked + label {
@@ -54,14 +54,23 @@ body {
     border: 2px solid #e2e8f0;
 }
 
+.activityBtns label:hover {
+    background: rgba(15,118,110,0.4);
+}
+
 .activityBtns label {
     border: 2px solid #475569;
     border-radius: 10px;
     padding: 5px;
-    z-index: 90;
+    z-index: 3;
 }
 
 .otherInput {
   height: 30px;
   width:200px;
 }
+
+/* Date picker styles */
+.react-datepicker-popper {
+    z-index: 100 !important;
+  }

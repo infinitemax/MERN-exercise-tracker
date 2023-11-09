@@ -4,7 +4,6 @@ import Dashboard from "@/components/Dashboard";
 import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import ActivityRecorder from "@/components/ActivityRecorder";
 
 export default function MyAreaPage() {
     const [data, setData] = useState();

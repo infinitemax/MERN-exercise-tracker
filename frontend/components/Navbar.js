@@ -120,7 +120,7 @@ const Navbar = () => {
                 </div>
             </nav>
             {isRecording && <ActivityRecorder 
-                closeRecorder={closeRecorder}
+                closeRecorder={() => closeRecorder()}
             />}
         </>
     );

@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 // a date selection component that allows the user to select today, or picka date from a date picker.
 const DateSelect = (props) => {
-
-    const [otherDate, setOtherDate] = useState(false)
-
+    const [startDate, setStartDate] = useState(new Date());
     return (
-        <div>
-            <button className="p-4 border-2 border-slate-700 rounded-md">Today</button>
-            <button>Pick date</button>
-        </div>
+
+            <DatePicker 
+            
+            wrapperClassName="datePicker" dateFormat="dd/MM/yyyy"
+                selected={startDate}
+                onChange={(date) => {
+                    setStartDate(date)
+                    props.getDate(date)
+                }}
+                showTimeSelect
+            />
+
     );
 };
 
