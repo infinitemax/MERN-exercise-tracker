@@ -4,7 +4,9 @@ const { User } = require("../models/User")
 // ADD AN ACTIVITY - PROTECTED
 // when a user adds an activity it is saved to the activiites collection, and the id of that activity is pushed to the user's activity array.
 exports.addActivity = async (req, res) => {
-    const { activity, duration, intensity, notes } = req.body
+    const { activity, duration, intensity, date, notes } = req.body.data;
+
+    console.log(req.body)
     
     // get user id from req (middleware)
     const userId = req.userId
@@ -15,9 +17,12 @@ exports.addActivity = async (req, res) => {
             activity,
             duration,
             intensity,
+            date,
             notes,
             user: userId
         });
+        console.log("new activity is:")
+        console.log(newActivity);
         await newActivity.save();
         console.log(`newActivity._id = ${newActivity._id}`);
 

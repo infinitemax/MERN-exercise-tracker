@@ -7,7 +7,7 @@ import apiClient from "@/apiClient";
 import { useRouter } from "next/navigation";
 import ActivityRecorder from "./ActivityRecorder";
 
-const Navbar = () => {
+const Navbar = (props) => {
     // router for redirect
     const router = useRouter();
 
@@ -18,7 +18,6 @@ const Navbar = () => {
         // api call to logout route
         const response = await apiClient.logOut();
 
-        console.log(response);
         // redirect to logged out page
         return router.push("/logged-out");
     };
@@ -28,7 +27,6 @@ const Navbar = () => {
         if (isRecording) {
             setIsRecording(false);
         }
-
         return
     }
 
@@ -121,6 +119,7 @@ const Navbar = () => {
             </nav>
             {isRecording && <ActivityRecorder 
                 closeRecorder={() => closeRecorder()}
+                handleActivityUpdate = {() => props.handleActivityUpdate()}
             />}
         </>
     );

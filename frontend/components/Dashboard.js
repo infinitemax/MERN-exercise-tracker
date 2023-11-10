@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ActivityCard from "./ActivityCard";
+
 
 const Dashboard = (props) => {
     
@@ -14,6 +15,7 @@ const Dashboard = (props) => {
             {props.data.map((activity) => {
                 return <ActivityCard {...activity} 
                     key={activity._id}
+                    handleActivityUpdate={() => {props.handleActivityUpdate()}}
                 />;
             })}
         </div>
