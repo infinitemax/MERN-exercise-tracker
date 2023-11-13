@@ -12,14 +12,13 @@ export default function MyAreaPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect( () => {
-        
         getUserData();
-        console.log("how many times?")
     }, []);
 
     // load up the user's data
     const getUserData = async () => {
         try {
+
             const response = await apiClient.loadUserData();
 
             // if we don't get back 200, the user is not auth'd - set state and send message
@@ -28,13 +27,9 @@ export default function MyAreaPage() {
                 setIsLoading(false);
                 return
             }
-
             // add user's activities to the activities variable
             setData(response.data.user.activities)
-
             setUserInfo(response.data.user)
-
-
             setIsLoading(false);
             return
         } catch (error) {
@@ -42,10 +37,20 @@ export default function MyAreaPage() {
         }
     };
 
+    // update user data when prompted by children
+    const [updateData, setUpdateData] = useState(false)
+
+    const handleActivityUpdate = () => {
+        setUpdateData(!updateData)
+    }
+
+    useEffect(() => {
+        getUserData()
+    }, [updateData])
+
     return (
         <div>
             
-
             {isLoading && <h2>Loading...</h2>}
             {!isLoading && (
                 <>
@@ -58,12 +63,15 @@ export default function MyAreaPage() {
                             .
                         </h2>
                     )}
-                    {isAuthorised && <Navbar />}
+                    {isAuthorised && <Navbar 
+                        handleActivityUpdate={() => {handleActivityUpdate()}}
+                    />}
                     {isAuthorised && 
                     <Dashboard 
                         data={data}
                         userInfo={userInfo}
                         hello="hello"
+                        handleActivityUpdate={() => {handleActivityUpdate()}}
                     />}
                 </>
             )}

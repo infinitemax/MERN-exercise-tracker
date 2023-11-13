@@ -134,7 +134,8 @@ exports.getUserArea = async (req, res) => {
     try {
         // find the user on the basis of the ID we get from the token payload.
         // note use of populate method - this populates the user's activities array
-        const user = await User.findById(userId).populate("activities");
+        
+        const user = await User.findById(userId).populate({path: "activities", options: { sort: { date: -1 }}});
 
         // if there is no user, send a 401
         if (!user) {

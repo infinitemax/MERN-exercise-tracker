@@ -15,7 +15,9 @@ const activitySchema = new mongoose.Schema(
             type: Number,
             // require: true,
         },
-        // add date = what's the best approach? 
+        date: {
+            type: Date
+        },
         notes: String,
         user: {type: mongoose.Schema.Types.ObjectId, ref: User}
     },
