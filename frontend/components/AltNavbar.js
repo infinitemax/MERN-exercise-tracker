@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link';
-import AltNavbarDropdown from './AltNavbarDropdown';
+import AltNavbarDropdown from './NavbarDropdown';
 import Image from 'next/image';
 
 

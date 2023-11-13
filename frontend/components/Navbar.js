@@ -6,7 +6,7 @@ import { useState } from "react";
 import apiClient from "@/apiClient";
 import { useRouter } from "next/navigation";
 import ActivityRecorder from "./ActivityRecorder";
-import AltNavbarDropdown from "./AltNavbarDropdown";
+import NavbarDropdown from "./NavbarDropdown";
 
 const Navbar = (props) => {
     // router for redirect
@@ -17,7 +17,11 @@ const Navbar = (props) => {
     const [navbar, setNavbar] = useState(false);
 
     
-
+    // THE NEW NAVBAR!
+    // The new navbar works like this:
+    // - an array holds all the links that the navbar will contain, including sub-links as children.
+    // - we map over the array, and if the item has no children, we render a link with various properties within the item in the array
+    // - if the item has children, we render a Dropdown component which itself iterates through the children and renders them as links (or another dropdown if there are further children)
     const menuItems = [
         {
             title: "Home",
@@ -134,7 +138,7 @@ const Navbar = (props) => {
                         <div className="items-center justify-center md:justify-end md:flex">
                             {menuItems.map((item) => {
                                 return item.hasOwnProperty("children") ? (
-                                    <AltNavbarDropdown item={item} />
+                                    <NavbarDropdown item={item} />
                                 ) : (
                                     <Link className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500" href={item?.href} onClick={item?.onClick}>{item.title}</Link>
                                 )

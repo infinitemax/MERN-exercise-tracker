@@ -10,7 +10,6 @@ const Dashboard = (props) => {
     const emptyDataCheck = (data) => {
         if (data.length === 0) {
             setIsEmpty(true);
-            console.log("hello");
         } else {
             setIsEmpty(false);
         }

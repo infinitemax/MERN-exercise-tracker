@@ -3,7 +3,7 @@ import Link from "next/link";
 import { isThisMinute } from "date-fns";
 
 
-const AltNavbarDropdown = (props) => {
+const NavbarDropdown = (props) => {
     const item = props.item;
     const [isOpen, setIsOpen] = useState(false);
     const menuItems = item?.children ? item.children : [];
@@ -21,7 +21,7 @@ const AltNavbarDropdown = (props) => {
                     {item.title}
                 </button>
                 <div
-                    className={`absolute top-10 right-2 z-30 w-[200px] flex flex-col py-4 bg-zinc-400 rounded-md ${transClass}`}
+                    className={`absolute top-10 right-2 z-30 w-[200px] flex flex-col py-4 bg-slate-300 rounded-md ${transClass}`}
                 >
                     {menuItems.map((item) => (
                         <Link
@@ -47,4 +47,4 @@ const AltNavbarDropdown = (props) => {
     );
 };
 
-export default AltNavbarDropdown;
+export default NavbarDropdown;
