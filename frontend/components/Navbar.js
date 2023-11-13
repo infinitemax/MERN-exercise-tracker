@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Suggestions from "./Suggestions";
 import apiClient from "@/apiClient";
 import { useRouter } from "next/navigation";
 import ActivityRecorder from "./ActivityRecorder";
@@ -32,8 +33,8 @@ const Navbar = (props) => {
 
     return (
         <>
-            <nav className="w-full bg-slate-300 fixed top-0 left-0 right-0 z-10">
-                <div className="justify-bewteen px-4 mx-auto lg:max-w-7xl md:items-center md:flex p-2 md:px-8">
+            <nav className="fixed top-0 left-0 right-0 z-10 w-full bg-slate-300">
+                <div className="p-2 px-4 mx-auto justify-bewteen lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div className="flex items-center justify-between md:block">
                         {/* LOGO */}
                         <Link href="/myarea">
@@ -96,7 +97,7 @@ const Navbar = (props) => {
                             </li>
                             <li className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500">
                                 <Link
-                                    href="#"
+                                    href="/suggestions"
                                     onClick={() => setNavbar(!navbar)}
                                 >
                                     Suggestions
