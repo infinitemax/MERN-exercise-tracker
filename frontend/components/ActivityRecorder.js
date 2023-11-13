@@ -102,7 +102,12 @@ const ActivityRecorder = (props) => {
                                     setPickedActivity(e.target.value);
                                 }}
                             />
-                            <label htmlFor="runBtn">Run</label>
+                            <label htmlFor="runBtn"><Image 
+                                src="/activity-icons/running-icon.png"
+                                width={30}
+                                height={30}
+                                alt="running icon"
+                            /></label>
                         </li>
                         <li className="activityRadio">
                             <input
@@ -115,7 +120,12 @@ const ActivityRecorder = (props) => {
                                     setPickedActivity(e.target.value);
                                 }}
                             />
-                            <label htmlFor="cylceBtn">Cycle</label>
+                            <label htmlFor="cylceBtn"><Image 
+                                src="/activity-icons/cycling-icon.png"
+                                width={30}
+                                height={30}
+                                alt="cycling icon"
+                            /></label>
                         </li>
                         <li className="activityRadio">
                             <input
@@ -128,7 +138,12 @@ const ActivityRecorder = (props) => {
                                     setPickedActivity(e.target.value);
                                 }}
                             />
-                            <label htmlFor="weightsBtn">Weights</label>
+                            <label htmlFor="weightsBtn"><Image 
+                                src="/activity-icons/weight-icon.png"
+                                width={30}
+                                height={30}
+                                alt="weights icon"
+                            /></label>
                         </li>
                         <li className="activityRadio">
                             <input
@@ -141,7 +156,12 @@ const ActivityRecorder = (props) => {
                                     setPickedActivity(e.target.value);
                                 }}
                             />
-                            <label htmlFor="climbBtn">Climb</label>
+                            <label htmlFor="climbBtn"><Image 
+                                src="/activity-icons/climb-icon.png"
+                                width={30}
+                                height={30}
+                                alt="climbing icon"
+                            /></label>
                         </li>
                         <li className="activityRadio">
                             <input
@@ -154,7 +174,12 @@ const ActivityRecorder = (props) => {
                                     setPickedActivity(e.target.value);
                                 }}
                             />
-                            <label htmlFor="swimBtn">Swim</label>
+                            <label htmlFor="swimBtn"><Image 
+                                src="/activity-icons/swimming-icon.png"
+                                width={30}
+                                height={30}
+                                alt="swimming icon"
+                            /></label>
                         </li>
                         <li className="activityRadio">
                             <input
@@ -167,7 +192,12 @@ const ActivityRecorder = (props) => {
                                     setPickedActivity(e.target.value);
                                 }}
                             />
-                            <label htmlFor="boxBtn">Box</label>
+                            <label htmlFor="boxBtn"><Image 
+                                src="/activity-icons/boxing-icon.png"
+                                width={30}
+                                height={30}
+                                alt="boxing icon"
+                            /></label>
                         </li>
                         <li className="activityRadio">
                             <input

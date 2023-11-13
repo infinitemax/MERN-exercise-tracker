@@ -20,7 +20,6 @@ export default function MyAreaPage() {
         try {
 
             const response = await apiClient.loadUserData();
-            console.log(response)
 
             // if we don't get back 200, the user is not auth'd - set state and send message
             if (response.status !== 200) {
@@ -47,14 +46,11 @@ export default function MyAreaPage() {
 
     useEffect(() => {
         getUserData()
-        console.log("an update occurred")
     }, [updateData])
 
     return (
         <div>
             
-        
-
             {isLoading && <h2>Loading...</h2>}
             {!isLoading && (
                 <>
