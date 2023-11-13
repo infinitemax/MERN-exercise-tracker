@@ -17,12 +17,11 @@ const ActivityCard = (props) => {
 
     // HANDLE CONFIRM DELETE
     const [clickCount, setClickCount] = useState(0);
-
-    // handle the delete button being clicked:
+// handle the delete button being clicked:
     // - works by incrementing a click counter
     // - at 0 we see the X
-    // - at 1 we the confirm delet modal
-    // - at 2 the activity is deleted
+    // - at 1 we see the confirm delete modal
+    // - pressing yes increments the counter again and the delete occurs, pressing no resets the counter and modal
 
     const handleDeleteClick = () => {
         setClickCount(clickCount + 1);
@@ -42,7 +41,7 @@ const ActivityCard = (props) => {
             console.log("time to delete!");
             props.deleteEntryHandler();
             props.handleActivityUpdate()
-            return
+            return;
         }
     }, [clickCount]);
 
