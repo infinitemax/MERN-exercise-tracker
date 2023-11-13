@@ -6,22 +6,69 @@ import { useState } from "react";
 import apiClient from "@/apiClient";
 import { useRouter } from "next/navigation";
 import ActivityRecorder from "./ActivityRecorder";
+import AltNavbarDropdown from "./AltNavbarDropdown";
 
 const Navbar = (props) => {
     // router for redirect
     const router = useRouter();
 
+    // handle navbar functionality
+    // on small screens, manage whether navbar is opened or not
     const [navbar, setNavbar] = useState(false);
+
+    
+
+    const menuItems = [
+        {
+            title: "Home",
+            href: "/myarea",
+            onClick: () => setNavbar(!navbar)
+        },
+        {
+            title: "Record",
+            href: "#",
+            onClick: () => {
+                setNavbar(!navbar)
+                setIsRecording(!isRecording)
+            }
+        },
+        {
+            title: "Suggestions",
+            href: "#",
+            onClick: () => setNavbar(!navbar)
+        },
+        {
+            title: "User",
+            href: "#",
+            children: [
+                {
+                    title: "User settings",
+                    href: "#",
+                    onClick: () => setNavbar(!navbar)
+                },
+                {
+                    title: "Set goals",
+                    href: "#",
+                    onClick: () => setNavbar(!navbar)
+                },
+                {
+                    title: "Sign out",
+                    href: "#",
+                    onClick: () => {
+                        setNavbar(!navbar)
+                        logoutHandler()
+                    }
+                },
+            ]
+        },
+    ]
+
+    // handle drop downs
+
+    
+    
+    // handle recorder opening and closing when user clicks
     const [isRecording, setIsRecording] = useState(false);
-
-    const logoutHandler = async () => {
-        // api call to logout route
-        const response = await apiClient.logOut();
-
-        // redirect to logged out page
-        return router.push("/logged-out");
-    };
-
     const closeRecorder = async () => {
         // a function to close the recorder modal when it's open, using the X
         if (isRecording) {
@@ -29,6 +76,15 @@ const Navbar = (props) => {
         }
         return
     }
+    
+    const logoutHandler = async () => {
+        console.log("test")
+        // api call to logout route
+        const response = await apiClient.logOut();
+        
+        // redirect to logged out page
+        return router.push("/logged-out");
+    };
 
     return (
         <>
@@ -74,7 +130,19 @@ const Navbar = (props) => {
                             navbar ? " pb-8 md:p-0 block" : "hidden"
                         }`}
                     >
-                        <ul className="items-center justify-center md:justify-end md:flex">
+
+                        <div className="items-center justify-center md:justify-end md:flex">
+                            {menuItems.map((item) => {
+                                return item.hasOwnProperty("children") ? (
+                                    <AltNavbarDropdown item={item} />
+                                ) : (
+                                    <Link className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500" href={item?.href} onClick={item?.onClick}>{item.title}</Link>
+                                )
+                            })}
+                        </div>
+
+
+                        {/* <ul className="items-center justify-center md:justify-end md:flex">
                             <li className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500">
                                 <Link
                                     href="#"
@@ -113,7 +181,7 @@ const Navbar = (props) => {
                                     Sign out
                                 </Link>
                             </li>
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
             </nav>
