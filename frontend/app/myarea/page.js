@@ -22,7 +22,7 @@ export default function MyAreaPage() {
             const response = await apiClient.loadUserData();
 
             // if we don't get back 200, the user is not auth'd - set state and send message
-            if (response.status !== 200) {
+            if (response?.status !== 200) {
                 setIsAuthorised(false);
                 setIsLoading(false);
                 return
