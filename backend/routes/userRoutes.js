@@ -14,6 +14,7 @@ const {
     deleteActivity,
     updateActivity,
 } = require("../controllers/activityController");
+const { getExerciseSuggestions } = require("../controllers/suggestionController");
 const { protect } = require("../middleware/authMiddleware");
 
 //users
@@ -31,6 +32,7 @@ router.post("/myarea", protect, addActivity); // add new activities to a user's 
 router.patch("/myarea/:id", protect, updateActivity)// update an activity
 router.delete("/myarea/:id", protect, deleteActivity); // delete an activity
 
+router.get('/exercise-suggestions', protect, getExerciseSuggestions);
 
 
 
