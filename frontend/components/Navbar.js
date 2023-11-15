@@ -24,11 +24,13 @@ const Navbar = (props) => {
     // - if the item has children, we render a Dropdown component which itself iterates through the children and renders them as links (or another dropdown if there are further children)
     const menuItems = [
         {
+            id: 0,
             title: "Home",
             href: "/myarea",
             onClick: () => setNavbar(!navbar)
         },
         {
+            id: 1,
             title: "Record",
             href: "#",
             onClick: () => {
@@ -37,25 +39,30 @@ const Navbar = (props) => {
             }
         },
         {
+            id: 2,
             title: "Suggestions",
             href: "#",
             onClick: () => setNavbar(!navbar)
         },
         {
+            id: 3,
             title: "User",
             href: "#",
             children: [
                 {
+                    id: 3.0,
                     title: "User settings",
-                    href: "#",
+                    href: "/settings",
                     onClick: () => setNavbar(!navbar)
                 },
                 {
+                    id: 3.1,
                     title: "Set goals",
                     href: "#",
                     onClick: () => setNavbar(!navbar)
                 },
                 {
+                    id: 3.2,
                     title: "Sign out",
                     href: "#",
                     onClick: () => {
@@ -92,7 +99,7 @@ const Navbar = (props) => {
 
     return (
         <>
-            <nav className="w-full bg-slate-300 fixed top-0 left-0 right-0 z-10">
+            <nav className="w-full bg-slate-300 top-0 left-0 right-0 z-10">
                 <div className="justify-bewteen px-4 mx-auto lg:max-w-7xl md:items-center md:flex p-2 md:px-8">
                     <div className="flex items-center justify-between md:block">
                         {/* LOGO */}
@@ -138,9 +145,9 @@ const Navbar = (props) => {
                         <div className="items-center justify-center md:justify-end md:flex">
                             {menuItems.map((item) => {
                                 return item.hasOwnProperty("children") ? (
-                                    <NavbarDropdown item={item} />
+                                    <NavbarDropdown item={item} key={item.id} />
                                 ) : (
-                                    <Link className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500" href={item?.href} onClick={item?.onClick}>{item.title}</Link>
+                                    <Link key={item.id} className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500" href={item?.href} onClick={item?.onClick}>{item.title} </Link>
                                 )
                             })}
                         </div>
