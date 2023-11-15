@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema(
         token: String,
         testActivities: [{type: String}],
         activities: [{ type: mongoose.Schema.Types.ObjectId, ref: "Activity"}],
+        firstName: String,
+        lastName: String,
+        dateOfBirth: Date,
+        height: Number,
+        weight: Number,
+        avatar: String // need to make this an image file!
     },
     { timestamps: true } // added to give us a created/edited timestamp
 );
