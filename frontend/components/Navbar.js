@@ -58,7 +58,7 @@ const Navbar = (props) => {
                 {
                     id: 3.1,
                     title: "Set goals",
-                    href: "#",
+                    href: "/goals",
                     onClick: () => setNavbar(!navbar)
                 },
                 {

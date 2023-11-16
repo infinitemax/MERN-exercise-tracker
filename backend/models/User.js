@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Goal } = require("./Goals");
 
 
 const userSchema = new mongoose.Schema(
@@ -26,7 +27,10 @@ const userSchema = new mongoose.Schema(
         avatar: {
             data: Buffer,
             contentType:String
-        } // need to make this an image file!
+        }, // need to make this an image file!
+        goals: [{
+            type: mongoose.Schema.Types.ObjectId, ref: "Goal"
+        }]
     },
     { timestamps: true } // added to give us a created/edited timestamp
 );
