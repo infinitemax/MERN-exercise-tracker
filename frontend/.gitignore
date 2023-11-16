@@ -10,6 +10,7 @@
 /coverage
 jest.*
 *.test.*
+/mocks
 
 # next.js
 /.next/
