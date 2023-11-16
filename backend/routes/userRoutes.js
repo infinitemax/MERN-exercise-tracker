@@ -22,7 +22,7 @@ router.post("/login", login); // log in a user
 router.get("/logout", protect, logout); // log a user out
 router.get("/all-users", protect, allUsers)
 router.delete("/myarea/delete-user", protect, deleteUser); // delete a user
-router.patch("/myarea", protect, updateUser) // update a user
+router.patch("/settings", protect, updateUser) // update a user
 
 
 //activities

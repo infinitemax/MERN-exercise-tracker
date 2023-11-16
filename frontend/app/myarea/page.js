@@ -21,6 +21,13 @@ export default function MyAreaPage() {
 
             const response = await apiClient.loadUserData();
 
+            // check whether we've had a response at all
+            if (!response) {
+                setIsAuthorised(false);
+                setIsLoading(false);
+                return
+            }
+
             // if we don't get back 200, the user is not auth'd - set state and send message
             if (response?.status !== 200) {
                 setIsAuthorised(false);
@@ -33,7 +40,10 @@ export default function MyAreaPage() {
             setIsLoading(false);
             return
         } catch (error) {
-            console.log(error);
+            res.status(500).json({
+                status: 200,
+                message: "Internal server error"
+            })
         }
     };
 
@@ -51,30 +61,30 @@ export default function MyAreaPage() {
     return (
         <div>
             
-            {isLoading && <h2>Loading...</h2>}
-            {!isLoading && (
-                <>
-                    {!isAuthorised && (
-                        <h2>
-                            401 error - you are not authorised.{" "}
-                            <a className="text-blue-700" href="/login">
-                                Please login
-                            </a>
-                            .
-                        </h2>
-                    )}
-                    {isAuthorised && <Navbar 
-                        handleActivityUpdate={() => {handleActivityUpdate()}}
-                    />}
-                    {isAuthorised && 
-                    <Dashboard 
-                        data={data}
-                        userInfo={userInfo}
-                        hello="hello"
-                        handleActivityUpdate={() => {handleActivityUpdate()}}
+                {isLoading && <h2>Loading...</h2>}
+                {!isLoading && (
+                    <>
+                        {!isAuthorised && (
+                            <h2>
+                                401 error - you are not authorised.{" "}
+                                <a className="text-blue-700" href="/login">
+                                    Please login
+                                </a>
+                                .
+                            </h2>
+                        )}
+                        {isAuthorised && <Navbar 
+                            handleActivityUpdate={() => {handleActivityUpdate()}}
+                        />}
+                        {isAuthorised && 
+                        <Dashboard 
+                            data={data}
+                            userInfo={userInfo}
+                            hello="hello"
+                            handleActivityUpdate={() => {handleActivityUpdate()}}
                     />}
                 </>
             )}
-        </div>
+        </div>                  
     );
 }

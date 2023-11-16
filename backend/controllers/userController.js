@@ -187,7 +187,10 @@ exports.updateUser = async (req, res) => {
     }
     */
     const userId = req.userId
-    const updatedInfo = req.body.update
+    console.log(`user to update: ${userId}`);
+    const updatedInfo = req.body.newUserInfo
+    console.log(`updated info = `);
+    console.log(updatedInfo);
     try {
         const updatedUser = await User.updateOne(
             {_id: userId}, updatedInfo
