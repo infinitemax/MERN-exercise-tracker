@@ -23,7 +23,10 @@ const userSchema = new mongoose.Schema(
         dateOfBirth: Date,
         height: Number,
         weight: Number,
-        avatar: String // need to make this an image file!
+        avatar: {
+            data: Buffer,
+            contentType:String
+        } // need to make this an image file!
     },
     { timestamps: true } // added to give us a created/edited timestamp
 );

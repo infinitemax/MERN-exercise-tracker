@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import TestComp from "./TestComp";
 
 const TestItem = () => {
     const [showText, setShowText] = useState(false);
@@ -29,6 +30,13 @@ const TestItem = () => {
                     Click to show
                 </button>
             </div>
+            <TestComp 
+                displayName="Max Max Max Max Max Max Max Max Max Max Max Max Max Max Max Max Max Max"
+			username="infinitemax"
+			email="max@max.com"
+			isEmailVerified={true}
+            />
+
         </div>
     );
 };
