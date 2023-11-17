@@ -75,6 +75,25 @@ export class ApiClient {
         }
     }
 
+    async updateUser(newUserInfo) {
+        try {
+            const response = await axios.patch(
+                `${url}/settings`, 
+                {newUserInfo},
+                {withCredentials: true}
+            );
+            
+            console.log(response)
+        } catch (error) {
+            console.log(error.response)
+            res.status(500).json({
+                status: 500,
+                message: "Server error"
+            })
+        }
+    }
+
+
     // delete a specified activity
     async deleteActivity(id){
         try {

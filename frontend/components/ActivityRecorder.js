@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Image from "next/image";
 import Slider from "./Slider";

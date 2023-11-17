@@ -33,15 +33,8 @@ try {
 }
 
 
-// auth code to go here
-
 
 app.use("/", userRoutes); // brings in user routes, e.g. register
-
-// app.post("/register", (req, res, next) => {
-//     res.send("hello")
-// })
-
 
 
 // per a supertest video, I have created an app.js file separate from the index.js so that we can test more easily. app.js can be imported into index.js and the index.js test file.
