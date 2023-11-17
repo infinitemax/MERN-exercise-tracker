@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Suggestions from "./Suggestions";
 import apiClient from "@/apiClient";
 import { useRouter } from "next/navigation";
 import ActivityRecorder from "./ActivityRecorder";
@@ -175,7 +176,7 @@ const Navbar = (props) => {
                             </li>
                             <li className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500">
                                 <Link
-                                    href="#"
+                                    href="/suggestions"
                                     onClick={() => setNavbar(!navbar)}
                                 >
                                     Suggestions

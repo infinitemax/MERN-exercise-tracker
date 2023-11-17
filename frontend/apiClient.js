@@ -112,6 +112,21 @@ export class ApiClient {
 
     }
 
+    async getExerciseSuggestions({ name, type, muscle, difficulty }) {
+        try {
+            const response = await axios.get(`${url}/exercise-suggestions`, {
+                params: { name, type, muscle, difficulty },
+                withCredentials: true,
+                
+            });
+            return response;
+        } catch (error) {
+            console.error("Error fetching exercise suggestions:", error);
+            throw error;
+        }
+    }
+    
+
     async logOut() {
         console.log("logging out");
 
