@@ -65,6 +65,7 @@ const ExerciseSuggestionsForm = ({ onSuggestionsFetched }) => {
           <option value="">Select Type</option>
           <option value="cardio">Cardio</option>
           <option value="strength">Strength</option>
+          <option value="strongman">Strongman</option>
           {/* Add other types here */}
         </select>
       </div>
@@ -73,6 +74,7 @@ const ExerciseSuggestionsForm = ({ onSuggestionsFetched }) => {
         <select id="muscle" name="muscle" value={formState.muscle} onChange={handleInputChange}>
           <option value="">Select Muscle Group</option>
           <option value="biceps">Biceps</option>
+          <option value="forearms">Forearms</option>
           {/* Add other muscle groups here */}
         </select>
       </div>
