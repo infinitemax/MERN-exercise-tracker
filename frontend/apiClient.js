@@ -112,6 +112,36 @@ export class ApiClient {
 
     }
 
+
+    //Save ranomly selected suggestion to database
+    async saveSelectedSuggestion(suggestionData) {
+        try {
+          const response = await axios.post(
+            `${url}/save-selected-suggestion`,
+            suggestionData,
+            {
+              withCredentials: true,
+            }
+          );
+          return response;
+        } catch (error) {
+          throw error;
+        }
+      }
+
+// get input options for suggesting exercise
+    async getExerciseOptions() {
+        try {
+            const response = await axios.get(`${url}/exercise-options`, { withCredentials: true });
+            console.log("Fetched types:", response.data.types);
+            console.log("Fetched difficulties:", response.data.difficulties);
+            return response;
+        } catch (error) {
+            console.error("Error fetching exercise options:", error);
+            throw error;
+        }
+    }
+    
     async getExerciseSuggestions({ name, type, muscle, difficulty }) {
         try {
             const response = await axios.get(`${url}/exercise-suggestions`, {

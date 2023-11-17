@@ -14,7 +14,7 @@ const {
     deleteActivity,
     updateActivity,
 } = require("../controllers/activityController");
-const { getExerciseSuggestions } = require("../controllers/suggestionController");
+const { getExerciseOptions, getExerciseSuggestions, saveSelectedSuggestion } = require("../controllers/suggestionController");
 const { protect } = require("../middleware/authMiddleware");
 
 //users
@@ -32,8 +32,10 @@ router.post("/myarea", protect, addActivity); // add new activities to a user's 
 router.patch("/myarea/:id", protect, updateActivity)// update an activity
 router.delete("/myarea/:id", protect, deleteActivity); // delete an activity
 
-router.get('/exercise-suggestions', protect, getExerciseSuggestions);
-
+//Suggestions
+router.get('/exercise-options', protect, getExerciseOptions); // fetch exercise options like types and difficulties automatically
+router.get('/exercise-suggestions', protect, getExerciseSuggestions); //fetch exercise suggestions based on user-selected criteria
+router.post('/save-selected-suggestion', protect, saveSelectedSuggestion);  // save a selected suggestion
 
 
 module.exports = router;

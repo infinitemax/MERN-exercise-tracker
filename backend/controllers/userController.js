@@ -135,7 +135,9 @@ exports.getUserArea = async (req, res) => {
         // find the user on the basis of the ID we get from the token payload.
         // note use of populate method - this populates the user's activities array
         
-        const user = await User.findById(userId).populate({path: "activities", options: { sort: { date: -1 }}});
+        const user = await User.findById(userId)
+            .populate({ path: "activities", options: { sort: { date: -1 }}})
+            .populate('suggestions'); 
 
         // if there is no user, send a 401
         if (!user) {
@@ -146,7 +148,7 @@ exports.getUserArea = async (req, res) => {
         }
 
         return res.status(200).json({
-            message: "user data route",
+            message: "User data route",
             username: user.username,
             user,
         });
@@ -154,7 +156,7 @@ exports.getUserArea = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             status: 500,
-            message: "server error",
+            message: "Server error",
         });
     }
 };
