@@ -11,6 +11,10 @@ const goalSchema = new mongoose.Schema(
             enum: ['repetition', 'duration', 'energy'],
             require: true
         },
+        activity: {
+            type: String,
+            require: true
+        },
         target: {
             type: Number,
             require: true

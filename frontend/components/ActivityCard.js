@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import format from "date-fns/format";
 import Image from "next/image";
-import apiClient from "@/apiClient";
 import ConfirmModal from "./ConfirmModal";
 
 const ActivityCard = (props) => {
@@ -40,7 +39,7 @@ const ActivityCard = (props) => {
         if (clickCount > 1) {
             console.log("time to delete!");
             props.deleteEntryHandler();
-            props.handleActivityUpdate()
+            props.handleActivityUpdate();
             return;
         }
     }, [clickCount]);

@@ -6,7 +6,6 @@ const { User } = require("../models/User")
 exports.addActivity = async (req, res) => {
     const { activity, duration, intensity, date, notes } = req.body.data;
 
-    console.log(req.body)
     
     // get user id from req (middleware)
     const userId = req.userId
@@ -38,7 +37,7 @@ exports.addActivity = async (req, res) => {
             message: "activity successfully saved"
         })
 
-        // I'm here - need to work out how to push the id to the user's activities array.
+
     } catch (error) {
         console.log(error)
         return res.status(500).json({
@@ -53,15 +52,23 @@ exports.addActivity = async (req, res) => {
 // user can click an activity and it is deleted.
 exports.deleteActivity = async (req, res) => {
     // NOTE - the id is coming from the url param, but is this the best/right approach? TBC...
+    const { userId } = req
     const activityToDelete = req.params.id
     
     console.log(`we are going to delete id: ${activityToDelete}`)
 
-    try {// find the activity and delete it
-    const deleted = await Activity.findByIdAndDelete(activityToDelete).exec()
+    try {
+        // find the activity and delete it
+        const deleted = await Activity.findByIdAndDelete(activityToDelete).exec()
     
-    res.send(deleted)
-    // does the user activity array need updating? YES! TODO...
+        // remove link from user's activity array
+        
+        const user = await User.findById(userId)
+        user.activities.pull(activityToDelete)
+        user.save()
+        res.send(deleted)
+
+  
     } catch (error) {
         console.error(error)
         return res.status(500).json({

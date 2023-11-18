@@ -1,16 +1,15 @@
 "use client";
 import React from "react";
-import apiClient from "@/apiClient";
+import goalsApiClinet from "@/goalsApiClinet";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import Settings from "@/components/Settings";
 import GoalsDashboard from "@/components/GoalsDashboard";
 
 export default function goals() {
 
     const [userInfo, setUserInfo] = useState()
     const [isAuthorised, setIsAuthorised] = useState(true);
-    const [isLoading, setIsLoading] = useState(true); 
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getUserData();
@@ -18,7 +17,7 @@ export default function goals() {
 
     const getUserData = async () => {
         try {
-            const response = await apiClient.loadUserData();
+            const response = await goalsApiClinet.getUserGoals();
 
             if (!response) {
                 setIsAuthorised(false);
@@ -44,16 +43,16 @@ export default function goals() {
         }
     }
 
-    // update user details when promped by children
-    const [updateDetails, setUpdateDetails] = useState(false)
+    // update user goals when promped by children
+    const [updateGoals, setUpdateGoals] = useState(false)
 
-    const handleDetailsUpdate = () => {
-        setUpdateDetails(!updateDetails)
+    const handleGoalsUpdate = () => {
+        setUpdateGoals(!updateGoals)
     }
 
     useEffect(() => {
         getUserData()
-    }, [updateDetails])
+    }, [updateGoals])
 
 
  
@@ -73,11 +72,12 @@ export default function goals() {
                         </h2>
                     )}
                     {isAuthorised && <Navbar 
-                        handleActivityUpdate={() => {handleActivityUpdate()}}
+                        // handleActivityUpdate={() => {handleActivityUpdate()}}
                     />}
                     {isAuthorised && 
                     <GoalsDashboard 
                         userInfo={userInfo}
+                        handleGoalsUpdate={() => {handleGoalsUpdate()}}
                     />
                     }
             </>
