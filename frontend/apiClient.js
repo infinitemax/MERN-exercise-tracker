@@ -135,6 +135,7 @@ export class ApiClient {
             const response = await axios.get(`${url}/exercise-options`, { withCredentials: true });
             console.log("Fetched types:", response.data.types);
             console.log("Fetched difficulties:", response.data.difficulties);
+            console.log("Fetched muscle:", response.data.muscles);
             return response;
         } catch (error) {
             console.error("Error fetching exercise options:", error);

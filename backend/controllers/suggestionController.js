@@ -43,6 +43,10 @@ async function fetchExerciseDifficulties() {
   return difficulties;
 }
 
+async function fetchExerciseMuscles() {
+  const muscles = await Suggestion.find().distinct('muscle');
+  return muscles;
+}
 
 
 // Function to get exercise options (types and difficulties)
@@ -52,8 +56,8 @@ exports.getExerciseOptions = async (req, res) => {
     // that fetch the respective data. Replace these with your actual implementation.
     const types = await fetchExerciseTypes(); // Fetch types
     const difficulties = await fetchExerciseDifficulties(); // Fetch difficulties
-
-    res.json({ types, difficulties });
+    const muscles = await fetchExerciseMuscles();
+    res.json({ types, difficulties, muscles });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Error fetching exercise options', error: error.message });

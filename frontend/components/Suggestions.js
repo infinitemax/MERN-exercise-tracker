@@ -93,11 +93,11 @@ const ExerciseSuggestionsForm = ({ onSuggestionsFetched }) => {
         <select name="muscle" value={formState.muscle} onChange={handleInputChange}>
     <option value="">Select Muscle</option>
     {muscles && muscles.length > 0 && 
-      muscles.map((muscle) => (
+      muscles.map((muscle) => 
         <option className="capitalize" key={muscle} value={muscle}>
           {muscle}
         </option>
-      ))}
+      )}
   </select>
       </div>
       <div>
