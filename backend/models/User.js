@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema(
         }, // need to make this an image file!
         goals: [{
             type: mongoose.Schema.Types.ObjectId, ref: "Goal"
-        }]
+        }],
+        suggestions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Suggestion" }] // Add this line
     },
     { timestamps: true } // added to give us a created/edited timestamp
 );

@@ -6,6 +6,7 @@ const suggestionSchema = new mongoose.Schema(
         name: String,
         type: String,
         muscle: String,
+        equipment: String,
         difficulty: String,
         instructions: String,
         user: { type: mongoose.Schema.Types.ObjectId, ref: User },

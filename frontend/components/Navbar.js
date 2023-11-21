@@ -42,7 +42,7 @@ const Navbar = (props) => {
         {
             id: 2,
             title: "Suggestions",
-            href: "#",
+            href: "/suggestions",
             onClick: () => setNavbar(!navbar)
         },
         {
@@ -100,8 +100,8 @@ const Navbar = (props) => {
 
     return (
         <>
-            <nav className="w-full bg-slate-300 top-0 left-0 right-0 z-10">
-                <div className="justify-bewteen px-4 mx-auto lg:max-w-7xl md:items-center md:flex p-2 md:px-8">
+            <nav className="top-0 left-0 right-0 z-10 w-full bg-slate-300">
+                <div className="p-2 px-4 mx-auto justify-bewteen lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div className="flex items-center justify-between md:block">
                         {/* LOGO */}
                         <Link href="/myarea">
