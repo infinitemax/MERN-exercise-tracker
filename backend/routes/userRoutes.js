@@ -14,6 +14,7 @@ const {
     deleteActivity,
     updateActivity,
 } = require("../controllers/activityController");
+const { getExerciseSuggestions } = require("../controllers/suggestionController");
 const { protect } = require("../middleware/authMiddleware");
 const { setGoal, displayGoals, deleteGoal } = require("../controllers/goalController");
 
@@ -32,11 +33,16 @@ router.post("/myarea", protect, addActivity); // add new activities to a user's 
 router.patch("/myarea/:id", protect, updateActivity)// update an activity
 router.delete("/myarea/:id", protect, deleteActivity); // delete an activity
 
+
 //goals
 router.post("/goals", protect, setGoal);// add user's goals
 router.get("/goals", protect, displayGoals);// get user's goals
 router.delete("/goals/:id", protect, deleteGoal)// delete user's goals
 // edit user's goals
+
+router.get('/exercise-suggestions', protect, getExerciseSuggestions);
+
+
 
 
 module.exports = router;
