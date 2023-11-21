@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 
 export default function MyAreaPage() {
     const [data, setData] = useState([]);
-    const [userInfo, setUserInfo] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
     const [isAuthorised, setIsAuthorised] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -89,7 +89,6 @@ export default function MyAreaPage() {
                         <Dashboard 
                             data={data}
                             userInfo={userInfo}
-                            hello="hello"
                             handleActivityUpdate={() => {handleActivityUpdate()}}
                     />}
                 </>
