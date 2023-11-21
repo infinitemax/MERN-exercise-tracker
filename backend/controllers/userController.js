@@ -136,7 +136,7 @@ exports.getUserArea = async (req, res) => {
         // note use of populate method - this populates the user's activities array
         
 
-        const user = await User.findById(userId).populate([{path: "activities", options: { sort: { date: -1 }}}, {path: "goals", "suggestions"}]);
+        const user = await User.findById(userId).populate([{path: "activities", options: { sort: { date: -1 }}}, {path: "goals"}, {path: "suggestions"}]);
 
 
         // if there is no user, send a 401
