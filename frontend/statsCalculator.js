@@ -112,6 +112,46 @@ export default class StatsCalculator {
     }
 
     // Is the user meeting their goals?
+    // a method to check a specific goal that we can apply iteratively through the goals.
+    checkRepetitionGoal(goal) {
+        // -----what percentage is it done?-----    
+        // get the number of times the user has done the goal activity
+        const numberOfActivities = this.totalActivities(goal.goalPeriod, goal.activity)
 
-    
+        const percentage = Math.round((numberOfActivities/goal.target) * 100)
+
+        // puts a cap on the output of 100
+        return percentage > 100 ? 100 : percentage
+    }
+
+    checkDurationGoal(goal) {
+
+        // get the amount of time the user has done the goal activity
+        const durationOfActivity = this.totalDuration(goal.goalPeriod, goal.activity)
+
+        const percentage = Math.round((durationOfActivity/goal.target) * 100)
+
+        return percentage > 100 ? 100 : percentage
+    }
+
+    checkUserGoal(goal) {
+
+        if (goal.goalType === "repetition") {
+            return this.checkRepetitionGoal(goal)
+        }
+        if (goal.goalType === "duration") {
+            return this.checkDurationGoal(goal)
+        }
+    }
+
+    checkAllGoals() {
+
+        const goalsWithCompletion = this.userData.goals.map((goal) => ({
+            ...goal,
+            "completion" : this.checkUserGoal(goal)
+        }))
+
+        return goalsWithCompletion
+    }
+
 }

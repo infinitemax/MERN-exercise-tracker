@@ -102,7 +102,7 @@ const testUser = {
         {
             "_id": "65589e23b2d29cefd5fa7388",
             "goalType": "repetition",
-            "activity": "cycle",
+            "activity": "run",
             "target": 3,
             "goalPeriod": 7,
             "userId": [
@@ -115,9 +115,9 @@ const testUser = {
         {
             "_id": "65589e3ab2d29cefd5fa738b",
             "goalType": "repetition",
-            "activity": "climb",
-            "target": 1,
-            "goalPeriod": 3,
+            "activity": "any",
+            "target": 3,
+            "goalPeriod": 7,
             "userId": [
                 "6541129f4ee767e78e88bb99"
             ],
@@ -128,9 +128,9 @@ const testUser = {
         {
             "_id": "65589f7cb2d29cefd5fa739a",
             "goalType": "repetition",
-            "activity": "any",
-            "target": 4,
-            "goalPeriod": 5,
+            "activity": "climb",
+            "target": 3,
+            "goalPeriod": 7,
             "userId": [
                 "6541129f4ee767e78e88bb99"
             ],
@@ -140,10 +140,10 @@ const testUser = {
         },
         {
             "_id": "65589fc3b2d29cefd5fa73ac",
-            "goalType": "duration",
-            "activity": "weights",
-            "target": 1,
-            "goalPeriod": 1,
+            "goalType": "repetition",
+            "activity": "any",
+            "target": 2,
+            "goalPeriod": 7,
             "userId": [
                 "6541129f4ee767e78e88bb99"
             ],
@@ -154,9 +154,9 @@ const testUser = {
         {
             "_id": "65589fccb2d29cefd5fa73b1",
             "goalType": "duration",
-            "activity": "climb",
-            "target": 1,
-            "goalPeriod": 1,
+            "activity": "any",
+            "target": 195,
+            "goalPeriod": 7,
             "userId": [
                 "6541129f4ee767e78e88bb99"
             ],
@@ -166,10 +166,10 @@ const testUser = {
         },
         {
             "_id": "65589fe7b2d29cefd5fa73b6",
-            "goalType": "repetition",
-            "activity": "cycle",
-            "target": 1,
-            "goalPeriod": 1,
+            "goalType": "duration",
+            "activity": "any",
+            "target": 300,
+            "goalPeriod": 7,
             "userId": [
                 "6541129f4ee767e78e88bb99"
             ],
