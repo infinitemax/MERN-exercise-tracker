@@ -39,7 +39,7 @@ export default function MyAreaPage() {
             if (response) {
                 // add user's activities to the activities variable
                 setData(response?.data.user.activities)
-                setUserInfo(response?.data.user)
+                setUserInfo(response?.data.user || {})
                 setIsLoading(false);
             } 
 
