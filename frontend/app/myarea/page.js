@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 
 export default function MyAreaPage() {
-    const [data, setData] = useState();
-    const [userInfo, setUserInfo] = useState();
+    const [data, setData] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
     const [isAuthorised, setIsAuthorised] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -35,11 +35,14 @@ export default function MyAreaPage() {
                 setIsLoading(false);
                 return
             }
-            // add user's activities to the activities variable
-            setData(response?.data.user.activities)
-            setUserInfo(response?.data.user)
-            setIsLoading(false);
-            
+
+            if (response) {
+                // add user's activities to the activities variable
+                setData(response?.data.user.activities)
+                setUserInfo(response?.data.user)
+                setIsLoading(false);
+            } 
+
             return 
         } catch (error) {
             res.status(500).json({
