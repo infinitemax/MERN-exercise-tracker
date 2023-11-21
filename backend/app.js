@@ -12,7 +12,9 @@ const cookieParser = require("cookie-parser")
 
 app.use(
     cors({
-        
+        origin: "http://localhost:3000" ,
+        methods: ["GET", "POST", "DELETE", "PATCH"],
+        credentials: true
     })
 );
 app.use(morgan("dev"));
