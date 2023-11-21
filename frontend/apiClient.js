@@ -59,7 +59,6 @@ export class ApiClient {
 
     // save user activity
     async saveUserActivity(data) { 
-        console.log(data)
         try {
             const response = await axios.post(
                 `${url}/myarea`,
