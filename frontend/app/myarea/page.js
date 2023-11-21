@@ -16,7 +16,6 @@ export default function MyAreaPage() {
         getUserData();
     }, []);
 
-    const stats = statsCalculator
 
     // load up the user's data
     const getUserData = async () => {
