@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ActivityCard from "./ActivityCard";
 import EmptyDashboard from "./EmptyDashboard";
 import apiClient from "@/apiClient";
+import StatsDashboard from "./statsComponents/StatsDashboard";
 
 
 const Dashboard = (props) => {
@@ -31,12 +32,18 @@ const Dashboard = (props) => {
 
     return (
         <div className="pt-20">
-            <h1 className="test-test text-3xl text-slate-800 text-center pb-12 pt-8">
+            <h1 className="test-test text-4xl text-slate-800 text-center pb-12 pt-8">
                 {username}'s dashboard
             </h1>
 
-            {isEmpty && <EmptyDashboard />}
+            <StatsDashboard 
+                userInfo={props.userInfo}
+            />
 
+
+            {isEmpty && <EmptyDashboard />}
+            {!isEmpty && 
+            <><h2 className="text-3xl text-slate-800 text-center pb-12 pt-8">Your activities</h2>
 
             {props.data.map((activity) => {
                 return (
@@ -52,7 +59,7 @@ const Dashboard = (props) => {
                         
                     />
                 );
-            })}
+            })}</>}
         </div>
     );
 };

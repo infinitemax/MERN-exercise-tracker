@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StatsCard = () => {
+const StatsCard = (props) => {
     // total number of workouts
     // total time exercising
     // favourite workout
