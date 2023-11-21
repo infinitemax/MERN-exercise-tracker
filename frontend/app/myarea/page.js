@@ -4,7 +4,6 @@ import Dashboard from "@/components/Dashboard";
 import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import statsCalculator from "@/statsCalculator";
 
 export default function MyAreaPage() {
     const [data, setData] = useState();
@@ -37,8 +36,8 @@ export default function MyAreaPage() {
                 return
             }
             // add user's activities to the activities variable
-            setData(response.data.user.activities)
-            setUserInfo(response.data.user)
+            setData(response?.data.user.activities)
+            setUserInfo(response?.data.user)
             setIsLoading(false);
             
             return 
