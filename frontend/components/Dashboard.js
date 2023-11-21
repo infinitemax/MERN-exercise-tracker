@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import ActivityCard from "./ActivityCard";
 import EmptyDashboard from "./EmptyDashboard";
 import apiClient from "@/apiClient";
-import ConfirmModal from "./ConfirmModal";
+import StatsDashboard from "./statsComponents/StatsDashboard";
+
 
 const Dashboard = (props) => {
     // this useState, function, and useEffect check to see if any activities have been logged so far, and if they haven't renders a message on the page.
@@ -23,21 +24,6 @@ const Dashboard = (props) => {
     username = username.split("")[0].toUpperCase() + username.slice(1);
 
     // CONFIRM AND DELETE
-    const [showConfirm, setShowConfirm] = useState(false);
-
-    // bring up modal
-    const showConfirmModal = () => {
-        setShowConfirm(!showConfirm)
-    }
-
-    // confirm user wants to delete
-    const confirmDelete = (confirmation) => {
-        if (confirmation) {
-            console.log("confirmed");
-        } else {
-            console.log("not confirmed");
-        }
-    };
 
     // handler function to delete activity (originally in activityCard)
     const deleteEntryHandler = async (id) => {
@@ -46,15 +32,18 @@ const Dashboard = (props) => {
 
     return (
         <div className="pt-20">
-            <h1 className="test-test text-3xl text-slate-800 text-center pb-12 pt-8">
+            <h1 className="test-test text-4xl text-slate-800 text-center pb-12 pt-8">
                 {username}'s dashboard
             </h1>
 
-            {isEmpty && <EmptyDashboard />}
+            <StatsDashboard 
+                userInfo={props.userInfo}
+            />
 
-            {/* {showConfirm && <ConfirmModal 
-                deleteEntryHandler={() => {deleteEntryHandler()}}
-            />} */}
+
+            {isEmpty && <EmptyDashboard />}
+            {!isEmpty && 
+            <><h2 className="text-3xl text-slate-800 text-center pb-12 pt-8">Your activities</h2>
 
             {props.data.map((activity) => {
                 return (
@@ -67,10 +56,10 @@ const Dashboard = (props) => {
                         deleteEntryHandler={() => {
                             deleteEntryHandler(activity._id);
                         }}
-                        showConfirmModal={() => showConfirmModal()}
+                        
                     />
                 );
-            })}
+            })}</>}
         </div>
     );
 };

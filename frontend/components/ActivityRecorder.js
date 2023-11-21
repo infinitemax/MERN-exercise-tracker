@@ -60,9 +60,6 @@ const ActivityRecorder = (props) => {
         }
     }, [saveRecord])
 
-    useEffect(() => {
-        console.log(activityData)
-    }, [activityData])
 
     return (
         <div className="relative flex justify-center">
