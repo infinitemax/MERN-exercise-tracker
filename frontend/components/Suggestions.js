@@ -6,7 +6,7 @@ const Suggestions = ({ onSuggestionsFetched }) => {
     name: '',
     type: '',
     muscle: '',
-    // equipment: '',
+    equipment: '',
     difficulty: '',
     instructions: '',
     
@@ -70,6 +70,7 @@ const Suggestions = ({ onSuggestionsFetched }) => {
             name: formState.name,
             type: formState.type,
             muscle: formState.muscle,
+            equipment: formState.equipment,
             difficulty: formState.difficulty,
         });
         console.log("API Response:", response.data);
@@ -119,10 +120,15 @@ const Suggestions = ({ onSuggestionsFetched }) => {
         {difficulties.map(difficulty => <option className='capitalize' key={difficulty} value={difficulty}>{difficulty}</option>)}
       </select>
       </div>
-      <button type="submit">Get Suggestions</button>
+      <button type="submit" className="px-4 py-2 font-semibold text-white rounded-full bg-slate-950 hover:bg-blue-700">
+          Generate Suggestion 
+        </button>
+        
     </form>
     </div>
   );
 };
 
 export default Suggestions;
+
+

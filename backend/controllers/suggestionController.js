@@ -85,19 +85,19 @@ exports.getExerciseSuggestions = async (req, res) => {
   // console.log(req.body)
   const userId = req.userId
   // Create a unique cache key based on the query parameters
-  // const redisKey = `exercise:${name}:${type}:${muscle}:${difficulty}:${userId}`;
+  const redisKey = `exercise:${name}:${type}:${muscle}:${difficulty}:${userId}`;
 
 
-  // try {
-  //   // Check for cached data in Redis first
-  //   console.log(`Checking Redis Cache for key: ${redisKey}`);
-  //   const cachedData = await redisClient.get(redisKey);
-  //   if (cachedData) {
-  //     console.log('Retrieved data from Redis cache');
-  //     return res.json(JSON.parse(cachedData));
-  //   }
+  try {
+    // Check for cached data in Redis first
+    console.log(`Checking Redis Cache for key: ${redisKey}`);
+    const cachedData = await redisClient.get(redisKey);
+    if (cachedData) {
+      console.log('Retrieved data from Redis cache');
+      return res.json(JSON.parse(cachedData));
+    }
 
-    try {
+    // try {
     console.log('Making API request');
     // If not in cache, fetch from the API
     const apiKey = process.env.API_NINJAS_KEY;
@@ -109,8 +109,8 @@ exports.getExerciseSuggestions = async (req, res) => {
 
     // Cache the API response in Redis
     // expiration time (1 hour = 3600 seconds)
-    // console.log('Storing in Redis');
-    // await redisClient.setex(redisKey, 3600, JSON.stringify(response.data));
+    console.log('Storing in Redis');
+    await redisClient.setex(redisKey, 3600, JSON.stringify(response.data));
     
     
  // Save the new suggestion in MongoDB
