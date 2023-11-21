@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import Suggestions from './Suggestions'; // Adjust the import path as needed
+import Suggestions from './Suggestions';
 
 const Exercise = () => {
     const [selectedExercise, setSelectedExercise] = useState(null);
 
     const handleExerciseSelect = (exercise) => {
+        console.log("Exercise selected:", exercise);
         setSelectedExercise(exercise);
     };
 
@@ -16,6 +17,7 @@ const Exercise = () => {
                     <h2 className='font-bold text-center'>{selectedExercise.name}</h2>
                     <p className="p-2 text-gray-800 text-md">Type: {selectedExercise.type}</p>
                     <p className="p-2 text-gray-800 text-md">Muscle Group: {selectedExercise.muscle}</p>
+                    <p className="p-2 text-gray-800 text-md">Equipment: {selectedExercise.equipment}</p>
                     <p className="p-2 text-gray-800 text-md">Difficulty: {selectedExercise.difficulty}</p>
                     <p className="p-2 text-gray-800 text-md">Instructions: {selectedExercise.instructions}</p>
                 </div>

@@ -143,12 +143,11 @@ export class ApiClient {
         }
     }
     
-    async getExerciseSuggestions({ name, type, muscle, difficulty }) {
+    async getExerciseSuggestions(params) {
         try {
             const response = await axios.get(`${url}/exercise-suggestions`, {
-                params: { name, type, muscle, difficulty },
+                params: params,
                 withCredentials: true,
-                
             });
             return response;
         } catch (error) {
@@ -156,6 +155,22 @@ export class ApiClient {
             throw error;
         }
     }
+
+    async getLatestSuggestion() {
+        try {
+          const response = await axios.get(`${url}/latest-suggestion`, { withCredentials: true });
+          if (response.status === 200) {
+            return response
+          } else {
+            console.log("Non-200 response:", response);
+            return null;
+          }
+        } catch (error) {
+          console.error("Error fetching latest suggestion:", error);
+          return null;
+        }
+      }
+
     
 
     async logOut() {
