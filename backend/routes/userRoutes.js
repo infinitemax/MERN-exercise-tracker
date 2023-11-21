@@ -16,6 +16,7 @@ const {
 } = require("../controllers/activityController");
 const { getExerciseOptions, getExerciseSuggestions, saveSelectedSuggestion, getLatestSuggestion } = require("../controllers/suggestionController");
 const { protect } = require("../middleware/authMiddleware");
+const { setGoal, displayGoals, deleteGoal } = require("../controllers/goalController");
 
 //users
 router.post("/register", register); // register a new user
@@ -32,10 +33,20 @@ router.post("/myarea", protect, addActivity); // add new activities to a user's 
 router.patch("/myarea/:id", protect, updateActivity)// update an activity
 router.delete("/myarea/:id", protect, deleteActivity); // delete an activity
 
+
 //Suggestions
 router.get('/exercise-options', protect, getExerciseOptions); // fetch exercise options like types and difficulties automatically
 router.get('/exercise-suggestions', protect, getExerciseSuggestions); //fetch exercise suggestions based on user-selected criteria
 router.post('/save-selected-suggestion', protect, saveSelectedSuggestion);  // save a selected suggestion
 router.get('/latest-suggestion', protect, getLatestSuggestion); // fetch latest suggestion for the user
+
+
+//goals
+router.post("/goals", protect, setGoal);// add user's goals
+router.get("/goals", protect, displayGoals);// get user's goals
+router.delete("/goals/:id", protect, deleteGoal)// delete user's goals
+// edit user's goals
+
+
 
 module.exports = router;

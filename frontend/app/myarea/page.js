@@ -4,6 +4,7 @@ import Dashboard from "@/components/Dashboard";
 import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import statsCalculator from "@/statsCalculator";
 
 export default function MyAreaPage() {
     const [data, setData] = useState();
@@ -14,6 +15,8 @@ export default function MyAreaPage() {
     useEffect( () => {
         getUserData();
     }, []);
+
+    const stats = statsCalculator
 
     // load up the user's data
     const getUserData = async () => {
@@ -38,7 +41,8 @@ export default function MyAreaPage() {
             setData(response.data.user.activities)
             setUserInfo(response.data.user)
             setIsLoading(false);
-            return
+            
+            return 
         } catch (error) {
             res.status(500).json({
                 status: 200,
@@ -46,6 +50,10 @@ export default function MyAreaPage() {
             })
         }
     };
+
+    useEffect(() => {
+        console.log(userInfo)
+    }, [userInfo])
 
     // update user data when prompted by children
     const [updateData, setUpdateData] = useState(false)

@@ -1,10 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import goalsApiClient from "@/goalsApiClinet";
 
 const AddGoalModal = (props) => {
+    const { userInfo } = props;
+
+    const [goalType, setGoalType] = useState();
+    const [target, setTarget] = useState(0);
+    const [activity, setActivity] = useState();
+    const [goalPeriod, setGoalPeriod] = useState(0);
+    const [goal, setGoal] = useState({});
+    const [saveGoal, setSaveGoal] = useState(false);
+    const [goalRecordCounter, setGoalRecordCounter] = useState(0);
+
+    useEffect(() => {
+        console.log(goal);
+    }, [goal]);
+
+    //handle goal submission
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        setSaveGoal(true);
+        await setGoal({
+            goalType,
+            target,
+            activity,
+            goalPeriod,
+        });
+        setSaveGoal(false);
+        await props.handleGoalsUpdate();
+        props.toggleGoalModal();
+        
+    };
+
+    // use effect to stop blank goals being saved
+    useEffect(() => {
+        const saveNewGoal = async () => {
+            await goalsApiClient.addGoal(goal)
+            // TODO - update goals list
+        };
+        if (saveGoal) {
+            saveNewGoal()
+        }
+    }, [saveGoal]);
+
     return (
         <div className="relative flex justify-center">
-            <div className="md:w-96 bg-slate-400 border-4 border-slate-300 absolute mt-24 z-10 rounded-lg px-6 py-6">
+            <div className="bg-slate-400 border-4 border-slate-300 absolute z-10 rounded-lg px-6 py-6 h-[480px]">
                 <button
                     className="absolute right-2 top-2"
                     onClick={() => props.toggleGoalModal()}
@@ -22,44 +64,151 @@ const AddGoalModal = (props) => {
                         submitHandler(e);
                     }}
                 >
-                    <h2 className="text-3xl text-slate-800 text-center">
+                    <h2 className="text-3xl text-slate-800 text-center pb-8">
                         Set a goal!
                     </h2>
-                    <ul>
-                        <li className="genreRadio">
-                            <input 
+                    <ul className="pb-6">
+                        <li className="goalTypeRadio pb-4">
+                            <input
                                 type="radio"
-                                id=""
-                                name="genreBtn"
-                                value=""
+                                id="repetitionBtn"
+                                name="goalTypeBtn"
+                                value="repetition"
                                 onClick={(e) => {
-                                    setGoalType()
+                                    setGoalType(e.target.value);
+                                    setGoalRecordCounter(1)
                                 }}
                             />
+                            <label htmlFor="repetitionBtn">
+                                <strong>Repetition</strong> - set a goal based
+                                on how often you want to exercise in a given
+                                period
+                            </label>
                         </li>
-                        <li className="genreRadio">
-                            <input 
+                        <li className="goalTypeRadio">
+                            <input
                                 type="radio"
-                                id=""
-                                name="genreBtn"
-                                value=""
+                                id="durationBtn"
+                                name="goalTypeBtn"
+                                value="duration"
                                 onClick={(e) => {
-                                    setGoalType()
+                                    setGoalType(e.target.value);
+                                    setGoalRecordCounter(1)
                                 }}
                             />
+                            <label htmlFor="durationBtn">
+                                <strong>Duration</strong> - set a goal about how
+                                long you want to exercise over a given period
+                            </label>
                         </li>
                     </ul>
-                    <select>
-                        <option value="run">Run</option>
-                        <option value="cylce">Cycle</option>
-                        <option value="weights">Weights</option>
-                        <option value="climb">Climb</option>
-                        <option value="swim">Swim</option>
-                        <option value="box">Box</option>
-                        <option value="other">Other</option>
-                    </select>
-                </form>
+                    {goalRecordCounter >= 1 && <><div className="pb-4">
+                        <label htmlFor="selectActivity" className="pr-2">
+                            Do you want to do a specific exercise?
+                        </label>
+                        <select
+                            className="rounded-md"
+                            id="selectActivity"
+                            onChange={(e) => {
+                                setActivity(e.target.value)
+                                setGoalRecordCounter(2)
+                            }}
+                        >   
+                            <option disabled selected value></option>
+                            <option value="any">Any</option>
+                            <option value="run">Run</option>
+                            <option value="cycle">Cycle</option>
+                            <option value="weights">Weights</option>
+                            <option value="climb">Climb</option>
+                            <option value="swim">Swim</option>
+                            <option value="box">Box</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div></>}
 
+                    {goalRecordCounter >= 2 && <><div className="h-6">
+                        {goalType === "repetition" && (
+                            <div>
+                                <label htmlFor="numberOfReps" className="pr-2">
+                                    How many times are you going to try to do
+                                    it?
+                                </label>
+                                <input
+                                    className="rounded-md w-12"
+                                    type="number"
+                                    id="numberOfReps"
+                                    onChange={(e) => {
+                                        setTarget(e.target.value);
+                                        setGoalRecordCounter(3)
+                                    }}
+                                ></input>
+                            </div>
+                        )}
+                        {goalType === "duration" && (
+                            <div>
+                                <label htmlFor="duration">
+                                    How long would you like to do it for?{" "}
+                                    <input
+                                        className="rounded-md w-12"
+                                        type="number"
+                                        id="duration"
+                                        onChange={(e) => {
+                                            setTarget(e.target.value);
+                                            setGoalRecordCounter(3)
+                                        }}
+                                    ></input>{" "}
+                                    minutes
+                                </label>
+                            </div>
+                        )}
+                    </div></>}
+
+                    <br />
+                    {goalRecordCounter >= 3 && <><label htmlFor="goalPeriod">
+                        Over each{" "}
+                        <input
+                            className="rounded-md w-12"
+                            type="number"
+                            id="goalPeriod"
+                            onChange={(e) => {
+                                setGoalPeriod(e.target.value);
+                                setGoalRecordCounter(4)
+                            }}
+                        ></input>{" "}
+                        day period
+                    </label></>}
+
+                    {activity && (
+                        <p className="text-2xl py-8">
+                            I, {userInfo.username}, am aiming to
+                            {activity === "any" ? " exercise" : ` ${activity}`}
+                            {target != 0 && (
+                                <>
+                                    {target && (
+                                        <>
+                                            {goalType === "repetition"
+                                                ? ` at least ${target} times`
+                                                : ` for at least ${target} minutes `}
+                                        </>
+                                    )}
+                                </>
+                            )}
+                            {goalPeriod != 0 && (
+                                <>
+                                    {goalPeriod && (
+                                        <> every {goalPeriod} days!</>
+                                    )}
+                                </>
+                            )}
+                        </p>
+                    )}
+                    {goalRecordCounter === 4 && <><button
+                        type="submit"
+                        className="bg-teal-700 hover:bg-teal-800 px-4 py-2 border-2 border-teal-500 rounded-full text-slate-200 mx-auto"
+                    >
+                        Submit goal!
+                    </button></>}
+                </form>
             </div>
         </div>
     );

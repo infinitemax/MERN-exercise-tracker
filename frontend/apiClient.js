@@ -59,7 +59,6 @@ export class ApiClient {
 
     // save user activity
     async saveUserActivity(data) { 
-        console.log(data)
         try {
             const response = await axios.post(
                 `${url}/myarea`,
@@ -86,10 +85,7 @@ export class ApiClient {
             console.log(response)
         } catch (error) {
             console.log(error.response)
-            res.status(500).json({
-                status: 500,
-                message: "Server error"
-            })
+            return error.response;
         }
     }
 
@@ -104,10 +100,7 @@ export class ApiClient {
             return response
         } catch (error) {
             console.log(error.response)
-            res.status(500).json({
-                status: 500,
-                message: "Server error"
-            })
+            return error.response
         }
 
     }
