@@ -97,10 +97,15 @@ exports.login = async (req, res) => {
             // save token as a cookie, returns status and message
 
             return res
-                .cookie("token", token, {
-                    httpOnly: true,
-                    // left out secure: .... here
-                })
+                .cookie("token", token, 
+                    {
+                        httpOnly: true,
+                        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+                        sameSite: "None",
+                        path: "/",
+                        secure: true,
+                    }
+                )
                 .status(200)
                 .json({
                     status: 200,
