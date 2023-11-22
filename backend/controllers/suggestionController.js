@@ -82,24 +82,27 @@ exports.getLatestSuggestion = async (req, res) => {
 exports.getExerciseSuggestions = async (req, res) => {
   const { name, type, muscle, difficulty } = req.query;
   console.log("Received query params:", req.query);
-  // console.log(req.body)
-  const userId = req.userId
-  // Create a unique cache key based on the query parameters
+  const userId = req.userId;
   const redisKey = `exercise:${name}:${type}:${muscle}:${difficulty}:${userId}`;
 
-
   try {
-    // Check for cached data in Redis first
     console.log(`Checking Redis Cache for key: ${redisKey}`);
     const cachedData = await redisClient.get(redisKey);
+
     if (cachedData) {
       console.log('Retrieved data from Redis cache');
-      return res.json(JSON.parse(cachedData));
+      const exercises = JSON.parse(cachedData);
+
+      // Select a random exercise if it's an array
+      if (Array.isArray(exercises) && exercises.length) {
+        const selectedExercise = exercises[Math.floor(Math.random() * exercises.length)];
+        return res.json(selectedExercise);
+      } else {
+        return res.json(exercises); // Handle cases where it's not an array
+      }
     }
 
-    // try {
     console.log('Making API request');
-    // If not in cache, fetch from the API
     const apiKey = process.env.API_NINJAS_KEY;
     const apiUrl = 'https://api.api-ninjas.com/v1/exercises';
     const response = await axios.get(apiUrl, {
@@ -107,56 +110,49 @@ exports.getExerciseSuggestions = async (req, res) => {
       params: { name, type, muscle, difficulty },
     });
 
-    // Cache the API response in Redis
-    // expiration time (1 hour = 3600 seconds)
     console.log('Storing in Redis');
     await redisClient.setex(redisKey, 3600, JSON.stringify(response.data));
-    
-    
- // Save the new suggestion in MongoDB
-    // const newSuggestion = new Suggestion({
-    //   name: "testname",
-    //   type: "testtype",
-    //   muscle: "testmuscle",
-    //   difficulty: "testdifficulty",
-    //   instructions: "testinstructions",
-    //   user: userId
-    // });
-    
-      console.log("-----> Response Data for New Suggestion Creation:", response.data);
-    
-      // Check if response.data is an array and has elements
-      if (Array.isArray(response.data) && response.data.length) {
-        // Randomly select one exercise from the array
-        const randomIndex = Math.floor(Math.random() * response.data.length);
-        const selectedExercise = response.data[randomIndex];
-        console.log("Selected Exercise:", selectedExercise);
-    
-        // Create a new Suggestion document with the selected exercise
-        const newSuggestion = new Suggestion({
+
+    console.log("-----> Response Data for New Suggestion Creation:", response.data);
+
+    if (Array.isArray(response.data) && response.data.length) {
+      const selectedExercise = response.data[Math.floor(Math.random() * response.data.length)];
+      console.log("Selected Exercise:", selectedExercise);
+  
+      // Check if the same suggestion already exists in MongoDB
+      const existingSuggestion = await Suggestion.findOne({
           ...selectedExercise,
           user: userId
-        });
-    
-        // Save the new suggestion to MongoDB
-        await newSuggestion.save();
-        console.log(`newSuggestion._id = ${newSuggestion._id}`);
-    
-        // Add the suggestion reference to the user's document
-        await User.findByIdAndUpdate(userId, {
-          $push: { suggestions: newSuggestion._id }
-        });
-        console.log('Storing suggestion for user in MongoDB');
-    
-        console.log("Sending Selected Exercise to Frontend:", selectedExercise);
-        // Send the selected exercise back to the frontend
-        res.json(selectedExercise);
+      });
+  
+      if (existingSuggestion) {
+          console.log('Retrieved existing suggestion from MongoDB');
+          res.json(existingSuggestion);
       } else {
-        // Handle the case where response.data is not an array or is empty
-        throw new Error('Received data is not an array or is empty');
+          // Save the new suggestion to MongoDB
+          const newSuggestion = new Suggestion({
+              ...selectedExercise,
+              user: userId
+          });
+  
+          await newSuggestion.save();
+          console.log(`New suggestion saved to MongoDB with _id: ${newSuggestion._id}`);
+  
+          // Update the user's suggestions in MongoDB
+          await User.findByIdAndUpdate(userId, {
+              $push: { suggestions: newSuggestion._id }
+          });
+  
+          console.log('Storing suggestion for user in MongoDB');
+  
+          res.json(selectedExercise);
       }
-    } catch (error) {
-      // Handle errors
-      res.status(500).json({ message: 'Error fetching exercise suggestions', error: error.message });
-    }
-  };
+  } else {
+      throw new Error('Received data is not an array or is empty');
+  }
+    
+  } catch (error) {
+    console.error('Error fetching exercise suggestions:', error);
+    res.status(500).json({ message: 'Error fetching exercise suggestions', error: error.message });
+  }
+};

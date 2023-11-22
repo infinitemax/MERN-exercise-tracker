@@ -120,7 +120,7 @@ const Suggestions = ({ onSuggestionsFetched }) => {
         {difficulties.map(difficulty => <option className='capitalize' key={difficulty} value={difficulty}>{difficulty}</option>)}
       </select>
       </div>
-      <button type="submit" className="px-4 py-2 font-semibold text-white rounded-full bg-slate-950 hover:bg-blue-700">
+      <button type="submit" className="px-4 py-2 font-semibold text-white rounded-full bg-slate-900 hover:bg-slate-800">
           Generate Suggestion 
         </button>
         

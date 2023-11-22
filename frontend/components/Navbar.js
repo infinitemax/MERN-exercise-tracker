@@ -100,7 +100,7 @@ const Navbar = (props) => {
 
     return (
         <>
-            <nav className="top-0 left-0 right-0 z-10 w-full bg-slate-300">
+            <nav className="top-0 left-0 right-0 z-10 w-full bg-white bg-opacity-10">
                 <div className="p-2 px-4 mx-auto justify-bewteen lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div className="flex items-center justify-between md:block">
                         {/* LOGO */}
@@ -148,7 +148,7 @@ const Navbar = (props) => {
                                 return item.hasOwnProperty("children") ? (
                                     <NavbarDropdown item={item} key={item.id} />
                                 ) : (
-                                    <Link key={item.id} className="py-2 text-xl text-slate-700 md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500" href={item?.href} onClick={item?.onClick}>{item.title} </Link>
+                                    <Link key={item.id} className="py-2 text-xl text-white md:px-6 text-center border-b-2 border-slate-400 md:border-b-0 hover:underline hover:decoration-4 hover:underline-offset-[1px] hover:decoration-teal-500" href={item?.href} onClick={item?.onClick}>{item.title} </Link>
                                 )
                             })}
                         </div>
