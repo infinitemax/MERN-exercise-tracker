@@ -5,6 +5,7 @@ import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import StatsCalculator from "@/statsCalculator";
+import Link from "next/link";
 
 
 export default function MyAreaPage() {
