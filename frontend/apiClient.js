@@ -53,7 +53,7 @@ export class ApiClient {
             return response;
         } catch (error) {
             console.log(error.response);
-            return error.response;
+            return error;
         }
     }
 

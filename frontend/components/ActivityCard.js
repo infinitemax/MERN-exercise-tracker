@@ -37,7 +37,6 @@ const ActivityCard = (props) => {
 
     useEffect(() => {
         if (clickCount > 1) {
-            console.log("time to delete!");
             props.deleteEntryHandler();
             props.handleActivityUpdate();
             return;

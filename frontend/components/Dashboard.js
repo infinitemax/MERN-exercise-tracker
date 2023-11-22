@@ -10,6 +10,7 @@ const Dashboard = (props) => {
     const [isEmpty, setIsEmpty] = useState(false);
     const emptyDataCheck = (data) => {
         if (data.length === 0) {
+
             setIsEmpty(true);
         } else {
             setIsEmpty(false);
@@ -17,11 +18,13 @@ const Dashboard = (props) => {
     };
     useEffect(() => {
         emptyDataCheck(props.data);
-    });
+    }, [props.data]);
 
     // Grab and capitalise usersame for heading
     let username = props.userInfo.username;
-    username = username.split("")[0].toUpperCase() + username.slice(1);
+    username = username?.split("")[0]?.toUpperCase() + username.slice(1);
+
+    
 
     // CONFIRM AND DELETE
 
@@ -37,7 +40,8 @@ const Dashboard = (props) => {
             </h1>
 
             <StatsDashboard 
-                userInfo={props.userInfo}
+                userWithStats={props.userWithStats}
+                userInfo={props.userInfo && props.userInfo}
             />
 
 
@@ -45,7 +49,7 @@ const Dashboard = (props) => {
             {!isEmpty && 
             <><h2 className="text-3xl text-slate-800 text-center pb-12 pt-8">Your activities</h2>
 
-            {props.data.map((activity) => {
+            {props?.data?.map((activity) => {
                 return (
                     <ActivityCard
                         {...activity}

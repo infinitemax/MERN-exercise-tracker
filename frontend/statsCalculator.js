@@ -1,5 +1,4 @@
-import { act } from "react-dom/test-utils";
-import goals from "./app/goals/page";
+
 
 export default class StatsCalculator {
     constructor(data) {
@@ -147,11 +146,13 @@ export default class StatsCalculator {
 
     checkAllGoals() {
 
-        const goalsWithCompletion = this.userData.goals.map((goal) => (
-            {
+        const goalsWithCompletion = []
+        this.userData.goals.map((goal) => (
+            goalsWithCompletion.push({
             ...goal,
             "completion" : this.checkUserGoal(goal)
-        }))
+        })
+        ))
 
         //number of goals
         let count = 0;
@@ -166,22 +167,12 @@ export default class StatsCalculator {
         })
 
         const extraGoalsData = {
-            ...goalsWithCompletion,
+            goalsWithCompletion,
             total: count,
             completed: completed
         }
 
         return extraGoalsData
-    }
-
-    numberOfGoals() {
-        
-
-        this.userData.goals
-    }
-
-    numberOfGoalsAchieved() {
-
     }
 
 

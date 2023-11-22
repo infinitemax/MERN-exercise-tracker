@@ -21,7 +21,6 @@ export default function goals() {
 
             if (!response) {
                 setIsAuthorised(false);
-                setIsLoading(false);
                 return
             }
 
@@ -36,10 +35,7 @@ export default function goals() {
             return
 
         } catch(error) {
-            res.status(500).json({
-                status: 200,
-                message: "Internal server error"
-            })
+            console.log(error)
         }
     }
 

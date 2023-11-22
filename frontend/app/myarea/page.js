@@ -4,16 +4,33 @@ import Dashboard from "@/components/Dashboard";
 import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import StatsCalculator from "@/statsCalculator";
+
 
 export default function MyAreaPage() {
     const [data, setData] = useState([]);
     const [userInfo, setUserInfo] = useState({});
     const [isAuthorised, setIsAuthorised] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
-
-    useEffect( () => {
+    const [userWithStats, setUserWithStats] = useState("")    
+    
+    useEffect(() => {
+        
         getUserData();
     }, []);
+
+    useEffect(() => {
+        if (userInfo) {
+
+            // const blah = new StatsCalculator(userInfo)
+            // console.log(blah)
+                // blah.userData = userInfo
+                // console.log(blah.userData)
+                // setUserWithStats(blah)
+        } else {
+            return;
+        }
+    }, [userInfo])
 
 
     // load up the user's data
@@ -26,35 +43,35 @@ export default function MyAreaPage() {
             if (!response) {
                 setIsAuthorised(false);
                 setIsLoading(false);
-                return
+                return "41"
             }
 
             // if we don't get back 200, the user is not auth'd - set state and send message
             if (response?.status !== 200) {
                 setIsAuthorised(false);
                 setIsLoading(false);
-                return
+                return "48"
             }
 
             if (response) {
                 // add user's activities to the activities variable
+                
                 setData(response?.data.user.activities || [])
                 setUserInfo(response?.data.user || {})
+                const goalStats = new StatsCalculator(response?.data.user || {})
+                setUserWithStats(goalStats);
                 setIsLoading(false);
+                return response
             } 
 
-            return 
+            return "58"
         } catch (error) {
-            res.status(500).json({
-                status: 200,
-                message: "Internal server error"
-            })
+            console.log(error)
         }
     };
 
-    useEffect(() => {
-        console.log(userInfo)
-    }, [userInfo])
+
+   
 
     // update user data when prompted by children
     const [updateData, setUpdateData] = useState(false)
@@ -65,20 +82,21 @@ export default function MyAreaPage() {
 
     useEffect(() => {
         getUserData()
+
     }, [updateData])
 
     return (
         <div>
             
-                {isLoading && <h2>Loading...</h2>}
+                 {isLoading && <h2>Loading...</h2>}
                 {!isLoading && (
                     <>
                         {!isAuthorised && (
                             <h2>
                                 401 error - you are not authorised.{" "}
-                                <a className="text-blue-700" href="/login">
+                                <Link className="text-blue-700" href="/login">
                                     Please login
-                                </a>
+                                </Link>
                                 .
                             </h2>
                         )}
@@ -89,10 +107,11 @@ export default function MyAreaPage() {
                         <Dashboard 
                             data={data}
                             userInfo={userInfo}
+                            userWithStats={userWithStats}
                             handleActivityUpdate={() => {handleActivityUpdate()}}
                     />}
                 </>
-            )}
+             )} 
         </div>                  
     );
 }
