@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser")
 
 app.use(
     cors({
-        origin: "https://vercel.live/link/mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app",
+        origin: ["https://vercel.live/link/mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app", "https://vercel.live/link/mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app"],
         methods: ["GET", "POST", "DELETE", "PATCH"],
         credentials: true,
         acces
