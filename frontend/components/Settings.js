@@ -23,8 +23,8 @@ const Settings = (props) => {
                 closeModal={() => {closeModal()}}
                 handleDetailsUpdate={() => props.handleDetailsUpdate()}
             />}
-            <div className="py-8 px-4 bg-slate-300 mt-24 rounded-lg">
-                <h1 className="text-2xl text-center pb-4">{userInfo.username}'s settings</h1>
+            <div className="px-4 py-8 mt-24 rounded-4xl shadow-md bg-gradient-to-b from-white to-[#f2fff9]">
+                <h1 className="pb-4 text-2xl text-center">{userInfo.username}'s settings</h1>
                 <p className="pb-2">View and update your details below</p>
                 <p>Username: {userInfo.username}</p>
                 <p>Email: {userInfo.email}</p>
@@ -33,7 +33,7 @@ const Settings = (props) => {
                 <p>Height: {userInfo?.height} {userInfo?.height && "cm"}</p>
                 <p>Weight: {userInfo?.weight} {userInfo?.weight && "kg"}</p>
                 <p>Avatar: {userInfo?.avatar}</p>
-                <button className="py-2 px-4 bg-slate-600 hover:bg-slate-700 text-slate-200 rounded-full" onClick={() => {setIsUpdating(true)}}>Update details</button>
+                <button className="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-700 text-slate-200" onClick={() => {setIsUpdating(true)}}>Update details</button>
             </div>
         </div>
     );

@@ -45,8 +45,8 @@ const AddGoalModal = (props) => {
     }, [saveGoal]);
 
     return (
-        <div className="relative flex justify-center">
-            <div className="bg-slate-400 border-4 border-slate-300 absolute z-10 rounded-lg px-6 py-6 h-[480px]">
+        <div className="relative flex justify-center pt-8">
+            <div className="bg-white shadow-md absolute z-10 rounded-lg px-6 py-6 h-[480px]">
                 <button
                     className="absolute right-2 top-2"
                     onClick={() => props.toggleGoalModal()}
@@ -64,11 +64,11 @@ const AddGoalModal = (props) => {
                         submitHandler(e);
                     }}
                 >
-                    <h2 className="text-3xl text-slate-800 text-center pb-8">
+                    <h2 className="pb-8 text-3xl text-center text-slate-800">
                         Set a goal!
                     </h2>
                     <ul className="pb-6">
-                        <li className="goalTypeRadio pb-4">
+                        <li className="pb-4 goalTypeRadio">
                             <input
                                 type="radio"
                                 id="repetitionBtn"
@@ -134,7 +134,7 @@ const AddGoalModal = (props) => {
                                     it?
                                 </label>
                                 <input
-                                    className="rounded-md w-12"
+                                    className="w-12 rounded-md"
                                     type="number"
                                     id="numberOfReps"
                                     onChange={(e) => {
@@ -149,7 +149,7 @@ const AddGoalModal = (props) => {
                                 <label htmlFor="duration">
                                     How long would you like to do it for?{" "}
                                     <input
-                                        className="rounded-md w-12"
+                                        className="w-12 rounded-md"
                                         type="number"
                                         id="duration"
                                         onChange={(e) => {
@@ -167,7 +167,7 @@ const AddGoalModal = (props) => {
                     {goalRecordCounter >= 3 && <><label htmlFor="goalPeriod">
                         Over each{" "}
                         <input
-                            className="rounded-md w-12"
+                            className="w-12 rounded-md"
                             type="number"
                             id="goalPeriod"
                             onChange={(e) => {
@@ -179,7 +179,7 @@ const AddGoalModal = (props) => {
                     </label></>}
 
                     {activity && (
-                        <p className="text-2xl py-8">
+                        <p className="py-8 text-2xl">
                             I, {userInfo.username}, am aiming to
                             {activity === "any" ? " exercise" : ` ${activity}`}
                             {target != 0 && (
@@ -204,7 +204,7 @@ const AddGoalModal = (props) => {
                     )}
                     {goalRecordCounter === 4 && <><button
                         type="submit"
-                        className="bg-teal-700 hover:bg-teal-800 px-4 py-2 border-2 border-teal-500 rounded-full text-slate-200 mx-auto"
+                        className="px-4 py-2 mx-auto rounded-full bg-slate-800 hover:bg-slate-500 text-slate-200"
                     >
                         Submit goal!
                     </button></>}

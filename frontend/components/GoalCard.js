@@ -36,7 +36,7 @@ const GoalCard = (props) => {
 
     return (
         <>
-            <div className="px-4 py-6 rounded-lg bg-teal-700 text-slate-200 border-2 border-teal-800 relative">
+            <div className="relative px-8 py-8 text-black bg-white rounded-lg shadow-md ">
             {clickCount === 0 ? <button
                         className="absolute top-2 right-2"
                         onClick={() => {
@@ -53,6 +53,7 @@ const GoalCard = (props) => {
                     </button> : <ConfirmModal 
                       deleteModalHanadler={(buttonClicked) => {deleteModalHanadler(buttonClicked)}}
                     />}
+                    <div className="items-center font-semibold capitalize ">
                 <p>I would like to:</p>
                 <p>{goal.activity === "any" ? "exercise" : <>{goal.activity}</>}</p>
                 {/* repetition goals: */}
@@ -65,7 +66,7 @@ const GoalCard = (props) => {
                     every {goal.goalPeriod}{" "}
                     {goal.goalPeriod > 1 ? "days" : "day"}
                 </p>
-                
+                </div>
             </div>
         </>
     );

@@ -45,14 +45,14 @@ const ActivityCard = (props) => {
 
     return (
         <div>
-            <div className="my-2 mx-auto px-4 py-2 rounded-md border-2 border-slate-800 bg-slate-700 text-slate-200 max-w-[600px] relative">
+            <div className="my-2 mx-auto px-4 py-2 rounded-md bg-gradient-to-b from-white to-[#f2fff9] shadow-md text-black max-w-[600px] relative">
                 <div className="flex flex-wrap ">
                     <h2>{title}</h2>
                     <p className="mx-2"> | </p>
                     <p className="font-light">Duration: {props.duration}</p>
                     <p className="mx-2"> | </p>
                     <p className="font-light">Intensity: {props.intensity}</p>
-                    <p className="absolute right-7 font-light">
+                    <p className="absolute font-light right-7">
                         {formattedDate}
                     </p>
                     {clickCount === 0 ? <button
