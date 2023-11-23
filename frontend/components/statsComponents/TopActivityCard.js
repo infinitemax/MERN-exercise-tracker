@@ -46,12 +46,6 @@ const TopActivityCard = (props) => {
         }
     }, [period]);
 
-    useEffect(() => {
-        if (topActivity) {
-            console.log(props.userInfo);
-            console.log(firstActive);
-        }
-    }, [topActivity]);
 
     return (
         <div className="bg-slate-600 border-2 border-slate-700 w-96 rounded-lg text-slate-200 p-6 font-light">
@@ -126,7 +120,7 @@ const TopActivityCard = (props) => {
                                 return
                             }
                             return (
-                                <li>{activity[0]} - {activity[1]} {
+                                <li key={index}>{activity[0]} - {activity[1]} {
                                     activity[1] > 1 ? 'times' : 'time'
                                 }</li>
                             );
