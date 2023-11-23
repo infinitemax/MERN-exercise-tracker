@@ -112,8 +112,8 @@ const TopActivityCard = (props) => {
                             {topActivity}
                         </h4>
                     )}
-                    <p className="text-center sm:text-2xl mb-4">
-                        <span>{activitiesInOrder[0][1]}</span> times
+                    <p className="text-center sm:text-2xl mb-4 font-extralight">
+                        <span>{activitiesInOrder[0][1]}</span> {activitiesInOrder[0][1] > 1 ? `times` : `time`}
                         {period < 30000
                             ? ` in the last ${period} days`
                             : ` since ${firstActive}`}
