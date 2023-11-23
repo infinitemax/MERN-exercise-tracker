@@ -24,6 +24,8 @@ const Dashboard = (props) => {
     let username = props.userInfo.username;
     username = username?.split("")[0]?.toUpperCase() + username.slice(1);
 
+
+
     
 
     // CONFIRM AND DELETE
@@ -42,6 +44,7 @@ const Dashboard = (props) => {
             <StatsDashboard 
                 userWithStats={props.userWithStats}
                 userInfo={props.userInfo && props.userInfo}
+                updateChildren={props.updateChildren}
             />
 
 

@@ -41,6 +41,10 @@ const TopActivityCard = (props) => {
     }, []);
 
     useEffect(() => {
+        loadActivities();
+    }, [props.updateChildren]);
+
+    useEffect(() => {
         if (period !== null) {
             loadActivities();
         }
