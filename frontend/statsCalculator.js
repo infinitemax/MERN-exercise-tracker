@@ -16,12 +16,14 @@ export default class StatsCalculator {
     getCutOff(period) {
         // takes a "period", which is the number of days we want to look at, and calculates the "cut off date", i.e. the date after which we're not interested in the activities
         if (period === 0) {
-            return new Date("1970-11-14T00:00:00.000Z")
+            console.log("all time!!!!")
+            return new Date("1980-11-14T00:00:00.000Z")
         }
         let cutOff = new Date();
         cutOff.setHours(0, 0, 0, 0);
         cutOff.setDate(cutOff.getDate() - period);
         cutOff = new Date(cutOff);
+        console.log("hi!!!!")
         return cutOff
 
     }
