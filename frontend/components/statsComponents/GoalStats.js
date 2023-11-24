@@ -95,7 +95,7 @@ const GoalStats = (props) => {
                                 <ProgressBar
                                     completed={goal.completion}
                                     bgColor="#34d399"
-                                    baseBgColor="#1e293b"
+                                    baseBgColor="#64748b"
                                     labelColor="#334155"
 
                                 />

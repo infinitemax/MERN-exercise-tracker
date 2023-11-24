@@ -204,7 +204,7 @@ const ActivityRecorder = (props) => {
                                 value="NEED TO GRAB VALUE FROM INPUT BOX"
                                 onClick={() => setOther(!other)}
                             />
-                            <label htmlFor="otherBtn">Other</label>
+                            <label htmlFor="otherBtn"><p className="rotate-45">Other</p></label>
                         </li>
                     </ul>
                     <div className="flex justify-center pt-4 h-30">
@@ -213,7 +213,7 @@ const ActivityRecorder = (props) => {
                                 type="text"
                                 id="otherInput"
                                 name="otherInput"
-                                className="p-2 rounded-md otherInput"
+                                className="p-2 rounded-md otherInput border-2 border-slate-200"
                                 placeholder="What did you do?"
                                 onChange={(e) => {
                                     setPickedActivity(e.target.value);

@@ -47,7 +47,7 @@ const Dashboard = (props) => {
 
             {isEmpty && <EmptyDashboard />}
             {!isEmpty && 
-            <><h2 className="pt-12 pb-8 font-semibold text-center text-white uppercase">Your activities</h2>
+            <><h2 className="pt-12 pb-8 font-semibold text-center text-white uppercase text-3xl">Your activities</h2>
 
             {props?.data?.map((activity) => {
                 return (
