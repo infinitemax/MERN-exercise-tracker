@@ -209,8 +209,8 @@ export default function Register() {
               <div className="mb-4 text-green-500">{successMessage}</div>
             )}
             <button
-              className={`p-2 text-white bg-blue-500 rounded w-full ${
-                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              className={`p-2 text-white bg-slate-500 rounded w-full ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-slate-600"
               }`}
               type="submit"
               disabled={isSubmitting}
