@@ -64,14 +64,14 @@ const GoalStats = (props) => {
     };
 
     return (
-        <div className="bg-slate-600 border-2 border-slate-700 w-96 rounded-lg text-slate-200 p-6 font-light">
-            <h3 className="text-3xl text-emerald-400 pb-2">Your goals</h3>
-            <hr className="h-1 bg-sky-600 my-1 border-0 rounded " />
+        <div className="p-6 font-light  rounded-lg bg-gradient-to-b from-white to-[#f2fff9] shadow-md border-slate-700 w-96 text-slate-200">
+            <h3 className="pb-2 text-3xl text-emerald-400">Your goals</h3>
+            <hr className="h-1 my-1 border-0 rounded bg-slate-600" />
             {!loading && (
                 <>
                     <div className="flex flex-wrap gap-2 my-4">
                         <div className="w-[48%] flex items-center">
-                            <p className="text-xl font-extralight">
+                            <p className="text-xl font-extralight text-slate-950">
                                 You are currently meeting {goals.completed} of
                                 your {goals.total} goals
                             </p>
@@ -84,12 +84,12 @@ const GoalStats = (props) => {
                             />
                         </div>
                     </div>
-                    <hr className="h-1 bg-sky-600 my-1 border-0 rounded " />
+                    <hr className="h-1 my-1 border-0 rounded bg-slate-600" />
 
                     {goals.goalsWithCompletion.map((goal, index) => {
                         return (
                             <div key={goal._id}>
-                                <p className="py-2">
+                                <p className="py-2 text-slate-950">
                                     {goalStrings && goalStrings[index]}
                                 </p>
                                 <ProgressBar
