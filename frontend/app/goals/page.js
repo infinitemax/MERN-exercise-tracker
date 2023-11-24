@@ -32,6 +32,7 @@ export default function goals() {
 
             setUserInfo(response.data.user)
             setIsLoading(false);
+            setUpdateGoals(!updateGoals)
             return
 
         } catch(error) {
@@ -47,6 +48,7 @@ export default function goals() {
     }
 
     useEffect(() => {
+        console.log("hello from goals dashboard")
         getUserData()
     }, [updateGoals])
 
