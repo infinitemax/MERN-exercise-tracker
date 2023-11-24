@@ -25,7 +25,6 @@ const Dashboard = (props) => {
     username = username?.split("")[0]?.toUpperCase() + username.slice(1);
 
 
-
     
 
     // CONFIRM AND DELETE
