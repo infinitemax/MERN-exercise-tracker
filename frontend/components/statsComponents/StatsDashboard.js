@@ -8,7 +8,6 @@ const StatsDashboard = (props) => {
 
     return (
         <div className="px-12 flex flex-wrap gap-8 justify-center">
-
             <GoalStats 
                 userWithStats={props.userWithStats}
                 updateChildren={props.updateChildren}

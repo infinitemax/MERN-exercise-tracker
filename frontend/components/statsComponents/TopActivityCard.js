@@ -58,13 +58,13 @@ const TopActivityCard = (props) => {
     }, [period]);
 
     return (
-        <div className="bg-slate-600 border-2 border-slate-700 w-96 rounded-lg text-slate-200 p-6 font-light">
-            <h3 className="text-3xl text-emerald-400 pb-2">
+        <div className="p-6 font-light rounded-lg shadow-md bg-gradient-to-b from-white to-[#f2fff9] w-96 text-slate-200">
+            <h3 className="pb-2 text-3xl text-emerald-400">
                 Your top activity
             </h3>
-            <hr className="h-1 bg-sky-600 mt-1 border-0 rounded " />
+            <hr className="h-1 mt-1 border-0 rounded bg-slate-600 " />
             <div></div>
-            <ul className="dateBtns flex flex-wrap justify-center gap-6 mt-2">
+            <ul className="flex flex-wrap justify-center gap-6 mt-2 dateBtns text-slate-950">
                 <li className="dateRadio">
                     <input
                         type="radio"
@@ -111,26 +111,28 @@ const TopActivityCard = (props) => {
             </ul>
             {!loading && (
                 <>
+
                     {topActivity ? (
-                        <h4 className="text-center text-emerald-200 text-5xl mt-6 mb-6">
+                        <h4 className="mt-6 mb-6 text-5xl text-center text-emerald-400">
                             {topActivity}
                         </h4>
-                    ) : <h4 className="text-center text-emerald-200 text-5xl mt-6 mb-6">
+                    ) : <h4 className="mt-6 mb-6 text-5xl text-center text-emerald-400">
                             No activity
                         </h4>}
-                    {topActivity !== "No activity" && <p className="text-center sm:text-2xl mb-4 font-extralight">
+                    {topActivity !== "No activity" && <p className="mb-4 text-center text-black sm:text-2xl font-extralight">
                         <span>{activitiesInOrder[0][1]}</span>{" "}
                         {activitiesInOrder[0][1] > 1 ? `times` : `time`}
                         {period < 30000
                             ? ` in the last ${period} days`
                             : ` since ${firstActive}`}
                     </p>}
-                    <hr className="h-1 bg-sky-600 mt-1 border-0 rounded " />
+                    <hr className="h-1 mt-1 border-0 rounded bg-slate-600 " />
                     {topActivity !== "No activity" && 
-                    <><h4 className="py-4 text-xl text-emerald-200 ">
+                    <><h4 className="py-4 text-xl text-emerald-400">
                         The best of the rest
                     </h4>
                     <ul style={{ listStyleType: "square" }} className="pl-8">
+
                         {activitiesInOrder.map((activity, index) => {
                             if (index === 0) {
                                 return;

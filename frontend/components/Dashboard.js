@@ -36,20 +36,18 @@ const Dashboard = (props) => {
 
     return (
         <div className="pt-20">
-            <h1 className="test-test text-4xl text-slate-800 text-center pb-12 pt-8">
+            <h1 className="pt-8 pb-12 text-4xl font-bold text-center text-white test-test">
                 {username}'s dashboard
             </h1>
-
             <StatsDashboard 
                 userWithStats={props.userWithStats}
                 userInfo={props.userInfo && props.userInfo}
                 updateChildren={props.updateChildren}
             />
 
-
             {isEmpty && <EmptyDashboard />}
             {!isEmpty && 
-            <><h2 className="text-3xl text-slate-800 text-center pb-12 pt-8">Your activities</h2>
+            <><h2 className="pt-12 pb-8 font-semibold text-center text-white uppercase">Your activities</h2>
 
             {props?.data?.map((activity) => {
                 return (
