@@ -107,7 +107,7 @@ const AddGoalModal = (props) => {
                             Do you want to do a specific exercise?
                         </label>
                         <select
-                            className="rounded-md"
+                            className="rounded-md border-2 border-slate-300"
                             id="selectActivity"
                             onChange={(e) => {
                                 setActivity(e.target.value)
@@ -134,7 +134,7 @@ const AddGoalModal = (props) => {
                                     it?
                                 </label>
                                 <input
-                                    className="w-12 rounded-md"
+                                    className="w-12 rounded-md border-2 border-slate-300"
                                     type="number"
                                     id="numberOfReps"
                                     onChange={(e) => {
@@ -149,7 +149,7 @@ const AddGoalModal = (props) => {
                                 <label htmlFor="duration">
                                     How long would you like to do it for?{" "}
                                     <input
-                                        className="w-12 rounded-md"
+                                        className="w-12 rounded-md border-2 border-slate-300"
                                         type="number"
                                         id="duration"
                                         onChange={(e) => {
@@ -167,7 +167,7 @@ const AddGoalModal = (props) => {
                     {goalRecordCounter >= 3 && <><label htmlFor="goalPeriod">
                         Over each{" "}
                         <input
-                            className="w-12 rounded-md"
+                            className="w-12 rounded-md border-2 border-slate-300"
                             type="number"
                             id="goalPeriod"
                             onChange={(e) => {
