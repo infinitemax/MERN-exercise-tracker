@@ -12,7 +12,12 @@ const cookieParser = require("cookie-parser")
 
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: [
+            "http://localhost:3000", 
+            // CORS STUFF COMMENTED OUT
+            // "https://mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app", 
+            // "https://mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app"
+        ],
         methods: ["GET", "POST", "DELETE", "PATCH"],
         credentials: true
     })

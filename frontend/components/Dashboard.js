@@ -24,6 +24,8 @@ const Dashboard = (props) => {
     let username = props.userInfo.username;
     username = username?.split("")[0]?.toUpperCase() + username.slice(1);
 
+
+
     
 
     // CONFIRM AND DELETE
@@ -38,14 +40,12 @@ const Dashboard = (props) => {
             <h1 className="pt-8 pb-12 text-4xl font-bold text-center text-white test-test">
                 {username}'s dashboard
             </h1>
-            <div className="flex items-center justify-center pb-6">
-  <div className="pt-6 text-center">
-    <StatsDashboard 
-      userWithStats={props.userWithStats}
-      userInfo={props.userInfo && props.userInfo}
-    />
-  </div>
-</div>
+            <StatsDashboard 
+                userWithStats={props.userWithStats}
+                userInfo={props.userInfo && props.userInfo}
+                updateChildren={props.updateChildren}
+            />
+
             {isEmpty && <EmptyDashboard />}
             {!isEmpty && 
             <><h2 className="pt-4 pb-12 font-semibold text-center uppercase text-slate-300">Your activities</h2>

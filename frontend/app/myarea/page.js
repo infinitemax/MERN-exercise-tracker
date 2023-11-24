@@ -5,6 +5,7 @@ import apiClient from "@/apiClient";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import StatsCalculator from "@/statsCalculator";
+import Link from "next/link";
 
 
 export default function MyAreaPage() {
@@ -12,25 +13,15 @@ export default function MyAreaPage() {
     const [userInfo, setUserInfo] = useState({});
     const [isAuthorised, setIsAuthorised] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
-    const [userWithStats, setUserWithStats] = useState("")    
+    const [userWithStats, setUserWithStats] = useState("");
+    const [updateChildren, setUpdateChildren] = useState(false);    
     
     useEffect(() => {
         
         getUserData();
     }, []);
 
-    useEffect(() => {
-        if (userInfo) {
 
-            // const blah = new StatsCalculator(userInfo)
-            // console.log(blah)
-                // blah.userData = userInfo
-                // console.log(blah.userData)
-                // setUserWithStats(blah)
-        } else {
-            return;
-        }
-    }, [userInfo])
 
 
     // load up the user's data
@@ -43,14 +34,14 @@ export default function MyAreaPage() {
             if (!response) {
                 setIsAuthorised(false);
                 setIsLoading(false);
-                return "41"
+                return
             }
 
             // if we don't get back 200, the user is not auth'd - set state and send message
             if (response?.status !== 200) {
                 setIsAuthorised(false);
                 setIsLoading(false);
-                return "48"
+                return
             }
 
             if (response) {
@@ -64,20 +55,19 @@ export default function MyAreaPage() {
                 return response
             } 
 
-            return "58"
+            return
         } catch (error) {
             console.log(error)
         }
     };
 
 
-   
-
     // update user data when prompted by children
     const [updateData, setUpdateData] = useState(false)
 
     const handleActivityUpdate = () => {
         setUpdateData(!updateData)
+        setUpdateChildren(!updateChildren)
     }
 
     useEffect(() => {
@@ -109,6 +99,7 @@ export default function MyAreaPage() {
                             userInfo={userInfo}
                             userWithStats={userWithStats}
                             handleActivityUpdate={() => {handleActivityUpdate()}}
+                            updateChildren={updateChildren}
                     />}
                 </>
              )} 

@@ -5,10 +5,8 @@ const StatsCard = (props) => {
     // total time exercising
     // favourite workout
   return (
-    <div>
-        <div>
-            <h3>Title</h3>
-        </div>
+    <div className="bg-slate-600 border-2 border-slate-700 w-96 rounded-lg text-slate-200 p-6 font-light">
+            
     </div>
   )
 }
