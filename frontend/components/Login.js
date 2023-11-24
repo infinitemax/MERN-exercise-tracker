@@ -18,7 +18,7 @@ export default function Login(props) {
     // Preload background image
     const img = new window.Image();
     img.src =
-      "https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80";
+      "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
     img.onload = () => setBgLoaded(true);
   }, []);
 
@@ -66,7 +66,7 @@ export default function Login(props) {
         }`}
         style={{
           backgroundImage: bgLoaded
-            ? "url('https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80')"
+            ? "url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
             : undefined,
           backgroundSize: "cover",
         }}
@@ -74,10 +74,10 @@ export default function Login(props) {
         <div className="absolute inset-0 z-0 bg-black opacity-60"></div>
         <div className="z-10 w-full px-24">
           <h1 className="text-5xl font-bold tracking-wide text-left">
-            Keep it special
+            Exercise Tracking App
           </h1>
           <p className="my-4 text-3xl">
-            Capture your personal memory in unique way, anywhere.
+          Discover the ultimate platform for tracking your workouts and unlocking personalized exercise recommendations tailored to your goals. 
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 flex justify-center p-4 space-x-4 text-center">
@@ -105,7 +105,7 @@ export default function Login(props) {
         {/* ...logo remains unchanged */}
         {/* </h1>
         </div> */}
-        <div className="z-20 w-full py-6 static">
+        <div className="static z-20 w-full py-6">
           <form
             onSubmit={(e) => {
               loginHandler(e);
@@ -131,7 +131,7 @@ export default function Login(props) {
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
-            <button className="my-2 bg-green-600 py-1 px-6 rounded-md">
+            <button className="px-6 py-1 my-2 bg-green-600 rounded-md">
               Enter
             </button>
           </form>

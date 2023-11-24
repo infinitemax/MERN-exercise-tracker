@@ -36,8 +36,8 @@ const Dashboard = (props) => {
     };
 
     return (
-        <div className="pt-20">
-            <h1 className="pt-8 pb-12 text-4xl font-bold text-center text-white test-test">
+        <div className="pt-12">
+            <h1 className="pt-6 pb-12 text-4xl font-bold text-center text-white test-test">
                 {username}'s dashboard
             </h1>
             <StatsDashboard 
