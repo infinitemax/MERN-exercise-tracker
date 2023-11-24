@@ -52,6 +52,7 @@ export default function MyAreaPage() {
                 const goalStats = new StatsCalculator(response?.data.user || {})
                 setUserWithStats(goalStats);
                 setIsLoading(false);
+                setUpdateChildren(!updateChildren)
                 return response
             } 
 
@@ -67,13 +68,17 @@ export default function MyAreaPage() {
 
     const handleActivityUpdate = () => {
         setUpdateData(!updateData)
-        setUpdateChildren(!updateChildren)
+        
     }
 
     useEffect(() => {
         getUserData()
-
     }, [updateData])
+
+    useEffect(() => {
+        console.log("page");
+        console.log(userWithStats)
+    }, [userWithStats])
 
     return (
         <div>

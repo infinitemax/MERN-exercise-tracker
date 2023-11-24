@@ -4,7 +4,6 @@ import GoalStats from "./GoalStats";
 import TopActivityCard from "./TopActivityCard";
 
 const StatsDashboard = (props) => {
-    
 
 
     return (

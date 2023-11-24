@@ -32,8 +32,8 @@ const GoalStats = (props) => {
 
     useEffect(() => {
         getGoalsData();
-        console.log("goal card yo yo yo");
     }, [props.updateChildren]);
+
 
     // useEffect(() => {
     //     setGoals((prevGoals) => props.userWithStats.checkAllGoals());

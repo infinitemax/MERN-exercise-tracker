@@ -17,12 +17,13 @@ const Settings = (props) => {
     }
 
     return (
-        <div className="relative flex justify-center">
+        <div className="relative">
             {isUpdating && <UpdateSettings 
                 userInfo={userInfo}
                 closeModal={() => {closeModal()}}
                 handleDetailsUpdate={() => props.handleDetailsUpdate()}
             />}
+
             <div className="px-4 py-8 mt-24 rounded-4xl shadow-md bg-gradient-to-b from-white to-[#f2fff9]">
                 <h1 className="pb-4 text-2xl text-center">{userInfo.username}'s settings</h1>
                 <p className="pb-2">View and update your details below</p>
@@ -35,6 +36,7 @@ const Settings = (props) => {
                 <p>Avatar: {userInfo?.avatar}</p>
                 <button className="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-700 text-slate-200" onClick={() => {setIsUpdating(true)}}>Update details</button>
             </div>
+
         </div>
     );
 };
