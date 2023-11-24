@@ -7,17 +7,20 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const createError = require("http-errors");
 const userRoutes = require("./routes/userRoutes")
+const cookieParser = require("cookie-parser")
 
 
 app.use(
     cors({
-        origin: "http://localhost:3001",
+        origin: ["https://mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app"],
+        methods: ["GET", "POST", "DELETE", "PATCH"],
+        credentials: true
     })
 );
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({ extended: false }));
-
+app.use(cookieParser());
     
 try {
     mongoose.connect(process.env.MONGODB_URI, {
@@ -30,15 +33,8 @@ try {
 }
 
 
-// auth code to go here
-
 
 app.use("/", userRoutes); // brings in user routes, e.g. register
-
-// app.post("/register", (req, res, next) => {
-//     res.send("hello")
-// })
-
 
 
 // per a supertest video, I have created an app.js file separate from the index.js so that we can test more easily. app.js can be imported into index.js and the index.js test file.
