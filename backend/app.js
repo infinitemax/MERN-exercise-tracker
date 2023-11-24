@@ -14,8 +14,7 @@ app.use(
     cors({
         origin: ["https://mern-exercise-tracker-git-v1-infinitemaxs-projects.vercel.app"],
         methods: ["GET", "POST", "DELETE", "PATCH"],
-        credentials: true,
-        access
+        credentials: true
     })
 );
 app.use(morgan("dev"));
