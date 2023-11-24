@@ -63,7 +63,7 @@ const ActivityRecorder = (props) => {
 
     return (
         <div className="relative flex justify-center">
-            <div className="md:w-96 bg-slate-400 border-4 border-slate-300 absolute mt-24 z-10 rounded-lg px-6 py-6">
+            <div className="absolute z-10 px-6 py-6 mt-24 border-2 md:w-96 rounded-lg shadow-md bg-gradient-to-b from-white to-[#f2fff9] border-teal-50">
                 {/* BTN TO CLOSE RECORDER */}
                 <button
                     className="absolute right-2 top-2"
@@ -83,11 +83,11 @@ const ActivityRecorder = (props) => {
                         
                     }}
                 >
-                    <h2 className="text-3xl text-slate-800 text-center">
+                    <h2 className="text-3xl text-center text-slate-800">
                         Record an activity
                     </h2>
                     {/* BUTTONS FOR ACTIVITY */}
-                    <ul className="activityBtns flex flex-wrap justify-center gap-6">
+                    <ul className="flex flex-wrap justify-center gap-6 activityBtns">
                         <li className="activityRadio">
                             <input
                                 type="radio"
@@ -207,13 +207,13 @@ const ActivityRecorder = (props) => {
                             <label htmlFor="otherBtn">Other</label>
                         </li>
                     </ul>
-                    <div className="pt-4 flex justify-center h-30">
+                    <div className="flex justify-center pt-4 h-30">
                         {other && (
                             <input
                                 type="text"
                                 id="otherInput"
                                 name="otherInput"
-                                className="otherInput rounded-md p-2"
+                                className="p-2 rounded-md otherInput"
                                 placeholder="What did you do?"
                                 onChange={(e) => {
                                     setPickedActivity(e.target.value);
@@ -244,11 +244,11 @@ const ActivityRecorder = (props) => {
                     {/* // date selector - needs to pass the date up to parent. */}
                     <DateSelect getDate={(date) => getDate(date)} />
                     <textarea
-                        className="w-full bg-slate-100 rounded-lg mt-6 px-2"
+                        className="w-full px-2 mt-6 rounded-lg bg-slate-100"
                         placeholder="Notes..."
                         onChange={(e) => setNotes(e.target.value)}
                     />
-                    <button className="py-2 px-3 rounded-full bg-slate-500 text-slate-100 border-2 border-slate-300 hover:bg-slate-600">
+                    <button className="px-3 py-2 border-2 rounded-full bg-slate-500 text-slate-100 border-slate-300 hover:bg-slate-600">
                         Submit
                     </button>
                 </form>

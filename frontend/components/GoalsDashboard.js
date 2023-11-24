@@ -28,7 +28,7 @@ const GoalsDashboard = (props) => {
   return (
     <div>
         <div className='flex flex-col justify-center'>
-            <h1 className='text-4xl text-center mt-12'>{userInfo.username}'s goals</h1>
+            <h1 className='mt-12 text-4xl font-bold text-center text-white'>{userInfo.username}'s goals</h1>
             {isAddingGoal &&
                 <AddGoalModal
                     userInfo={userInfo}
@@ -36,7 +36,7 @@ const GoalsDashboard = (props) => {
                     handleGoalsUpdate={() => props.handleGoalsUpdate()}
                 />
             }
-            <button className='bg-teal-700 hover:bg-teal-800 px-4 py-2 border-2 border-teal-500 rounded-full text-slate-200 w-48 mx-auto mt-12' onClick={() => { toggleGoalModal() }}>Add a goal</button>
+            <button className='w-48 px-4 py-2 mx-auto mt-12 rounded-full bg-slate-800 hover:bg-slate-600 text-slate-200' onClick={() => { toggleGoalModal() }}>Add a goal</button>
         </div>
             <div className='flex flex-wrap justify-center gap-8 pt-8'>
                 {goals.map(goal => {

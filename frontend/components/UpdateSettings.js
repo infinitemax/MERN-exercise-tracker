@@ -12,21 +12,18 @@ const UpdateSettings = (props) => {
     const [height, setHeight] = useState();
     const [weight, setWeight] = useState();
     const [avatar, setAvatar] = useState();
-    
-    
-    
+
     // handle submit
     const [userNewData, setUserNewData] = useState({});
-    const [readyToSubmit, setReadyToSubmit] = useState(false)
-    const [clickCount, setClickCount] = useState(1)
-    
+    const [readyToSubmit, setReadyToSubmit] = useState(false);
+    const [clickCount, setClickCount] = useState(1);
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        await setClickCount(clickCount + 1) 
+        e.preventDefault();
+        await setClickCount(clickCount + 1);
         if (clickCount > 1) {
-            setReadyToSubmit(true)
-            console.log("hello")
+            setReadyToSubmit(true);
+            console.log("hello");
             await setUserNewData({
                 username,
                 email,
@@ -35,157 +32,190 @@ const UpdateSettings = (props) => {
                 dateOfBirth,
                 height,
                 weight,
-                avatar
-            })
-            setReadyToSubmit(false)
-            console.log("bye")
-            props.closeModal()
-        }       
-    }
+                avatar,
+            });
+            setReadyToSubmit(false);
+            console.log("bye");
+            props.closeModal();
+        }
+    };
 
     // prevent blank update behaviour when modal is opened
-    useEffect(() => {  
+    useEffect(() => {
         const updateUser = async () => {
-            await apiClient.updateUser(userNewData)
-            props.handleDetailsUpdate()
-        }
+            await apiClient.updateUser(userNewData);
+            props.handleDetailsUpdate();
+        };
         if (readyToSubmit) {
-            updateUser()
+            updateUser();
         }
-    }, [userNewData])
+    }, [userNewData]);
 
     useEffect(() => {
         console.log(`clickCount = ${clickCount}`);
-    }, [clickCount])
-    
-
+    }, [clickCount]);
 
     return (
-        <div className="absolute w-full flex justify-center">
-            <div className="bg-slate-300 border-2 border-slate-500 rounded-lg">
-                <form action="" onSubmit={(e) => {
-                    handleSubmit(e)
-                }}>
-                    <h2 className="text-2xl text-center py-6">Update your details</h2>
-                    <ul className=" px-4">
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Username: </label>
+        <div className="absolute flex justify-center w-full">
+            <div className="bg-white rounded-lg shadow-md">
+                <form
+                    action=""
+                    onSubmit={(e) => {
+                        handleSubmit(e);
+                    }}
+                >
+                    <h2 className="py-6 text-2xl text-center">
+                        Update your details
+                    </h2>
+                    <ul className="px-4 ">
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Username:{" "}
+                            </label>
                             <input
                                 type="text"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.username}
                                 onChange={(e) => {
-                                    setUsername(e.target.value)
+                                    setUsername(e.target.value);
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Email: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Email:{" "}
+                            </label>
                             <input
                                 type="text"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.email}
                                 onChange={(e) => {
-                                    setEmail(e.target.value)
+                                    setEmail(e.target.value);
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">First name: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                First name:{" "}
+                            </label>
                             <input
                                 type="text"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.firstName}
                                 onChange={(e) => {
-                                    setFirstName(e.target.value)
+                                    setFirstName(e.target.value);
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Last name: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Last name:{" "}
+                            </label>
                             <input
                                 type="text"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.lastName}
                                 onChange={(e) => {
-                                    setLastName(e.target.value)
+                                    setLastName(e.target.value);
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Date of birth: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Date of birth:{" "}
+                            </label>
                             <input
                                 type="text"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
-                                placeholder={props.userInfo.dateOfBirth || "dd/mm/yyyy"}
+                                className="col-span-3 px-2 py-1 rounded-md"
+                                placeholder={
+                                    props.userInfo.dateOfBirth || "dd/mm/yyyy"
+                                }
                                 onChange={(e) => {
-                                    setDateOfBirth(new Date(e.target.value).toLocaleString("en-GB", {timeZone: "Europe/London"}))
+                                    setDateOfBirth(
+                                        new Date(e.target.value).toLocaleString(
+                                            "en-GB",
+                                            { timeZone: "Europe/London" }
+                                        )
+                                    );
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Height: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Height:{" "}
+                            </label>
                             <input
                                 type="number"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.height}
                                 onChange={(e) => {
-                                    setHeight(e.target.value)
+                                    setHeight(e.target.value);
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Weight: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Weight:{" "}
+                            </label>
                             <input
                                 type="number"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.weight}
                                 onChange={(e) => {
-                                    setWeight(e.target.value)
+                                    setWeight(e.target.value);
                                 }}
                             />
                         </li>
-                        <li className="p-1 grid grid-cols-4">
-                            <label htmlFor="">Avatar: </label>
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Avatar:{" "}
+                            </label>
                             <input
                                 type="text"
                                 id=""
                                 name=""
-                                className="px-2 py-1 rounded-md col-span-3"
+                                className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={props.userInfo.avatar}
                                 onChange={(e) => {
-                                    setAvatar(e.target.value)
+                                    setAvatar(e.target.value);
                                 }}
                             />
                         </li>
                     </ul>
                     <br />
-                    <button className=
-                    {`${clickCount < 2 ? "bg-teal-500 hover:bg-teal-600" : "bg-red-400 text-white hover:bg-red-500"}  rounded-full py-2 px-4 w-24`}>
-                        {clickCount < 2 ? "Submit" : "Sure?"}
-                    </button>
-                    <button
-                        className="bg-sky-500 hover:bg-sky-600 rounded-full py-2 px-4 w-24"
-                        onClick={() => {
-                            props.closeModal();
-                        }}
-                    >
-                        Cancel
-                    </button>
+                    <div className="flex justify-between px-4 py-3">
+                        <button
+                            className={`${
+                                clickCount < 2
+                                    ? "bg-teal-500 hover:bg-teal-600"
+                                    : "bg-red-400 text-white hover:bg-red-500"
+                            } rounded-full py-2 px-4 mr-2`} 
+                        >
+                            {clickCount < 2 ? "Submit" : "Sure?"}
+                        </button>
+                        <button
+                            className="px-4 py-2 ml-2 text-white rounded-full bg-sky-500 hover:bg-sky-600"
+                            onClick={() => {
+                                props.closeModal();
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
