@@ -27,18 +27,17 @@ const TopActivityCard = (props) => {
                 mostCommon[0].slice(1);
             setTopActivity(mostCommon);
             setActivitiesInOrder(activitiesInOrder);
+            // get month and year of first activity
+            let dateFirstActive =
+                props.userInfo.activities[props.userInfo.activities.length - 1]
+                    .date;
+            dateFirstActive = new Date(dateFirstActive);
+            const formattedDate = format(dateFirstActive, "MMM yyyy");
+            setFirstActive(formattedDate);
         } else {
             setTopActivity("No activity");
             setActivitiesInOrder(["No activity"]);
         }
-
-        // get month and year of first activity
-        let dateFirstActive =
-            props.userInfo.activities[props.userInfo.activities.length - 1]
-                .date;
-        dateFirstActive = new Date(dateFirstActive);
-        const formattedDate = format(dateFirstActive, "MMM yyyy");
-        setFirstActive(formattedDate);
 
         setLoading(false);
     };
@@ -58,7 +57,7 @@ const TopActivityCard = (props) => {
     }, [period]);
 
     return (
-        <div className="p-6 font-light rounded-lg shadow-md bg-gradient-to-b from-white to-[#f2fff9] w-96 text-slate-200">
+        <div className="p-6 font-light rounded-lg shadow-md bg-gradient-to-b from-white to-[#f2fff9] w-96 text-slate-950">
             <h3 className="pb-2 text-3xl text-emerald-400">
                 Your top activity
             </h3>
@@ -111,40 +110,48 @@ const TopActivityCard = (props) => {
             </ul>
             {!loading && (
                 <>
-
                     {topActivity ? (
                         <h4 className="mt-6 mb-6 text-5xl text-center text-emerald-400">
                             {topActivity}
                         </h4>
-                    ) : <h4 className="mt-6 mb-6 text-5xl text-center text-emerald-400">
+                    ) : (
+                        <h4 className="mt-6 mb-6 text-5xl text-center text-emerald-400">
                             No activity
-                        </h4>}
-                    {topActivity !== "No activity" && <p className="mb-4 text-center text-black sm:text-2xl font-extralight">
-                        <span>{activitiesInOrder[0][1]}</span>{" "}
-                        {activitiesInOrder[0][1] > 1 ? `times` : `time`}
-                        {period < 30000
-                            ? ` in the last ${period} days`
-                            : ` since ${firstActive}`}
-                    </p>}
+                        </h4>
+                    )}
+                    {topActivity !== "No activity" && (
+                        <p className="mb-4 text-center text-slate-950 sm:text-2xl font-extralight">
+                            <span>{activitiesInOrder[0][1]}</span>{" "}
+                            {activitiesInOrder[0][1] > 1 ? `times` : `time`}
+                            {period < 30000
+                                ? ` in the last ${period} days`
+                                : ` since ${firstActive}`}
+                        </p>
+                    )}
                     <hr className="h-1 mt-1 border-0 rounded bg-slate-600 " />
-                    {topActivity !== "No activity" && 
-                    <><h4 className="py-4 text-xl text-emerald-400">
-                        The best of the rest
-                    </h4>
-                    <ul style={{ listStyleType: "square" }} className="pl-8">
-
-                        {activitiesInOrder.map((activity, index) => {
-                            if (index === 0) {
-                                return;
-                            }
-                            return (
-                                <li key={index}>
-                                    {activity[0]} - {activity[1]}{" "}
-                                    {activity[1] > 1 ? "times" : "time"}
-                                </li>
-                            );
-                        })}
-                    </ul></>}
+                    {topActivity !== "No activity" && (
+                        <>
+                            <h4 className="py-4 text-xl text-emerald-400">
+                                The best of the rest
+                            </h4>
+                            <ul
+                                style={{ listStyleType: "square" }}
+                                className="pl-8"
+                            >
+                                {activitiesInOrder.map((activity, index) => {
+                                    if (index === 0) {
+                                        return;
+                                    }
+                                    return (
+                                        <li key={index}>
+                                            {activity[0]} - {activity[1]}{" "}
+                                            {activity[1] > 1 ? "times" : "time"}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </>
+                    )}
                 </>
             )}
         </div>
