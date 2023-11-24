@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import UpdateSettings from "./UpdateSettings";
+import format from "date-fns/format";
 
 
 const Settings = (props) => {
@@ -9,6 +10,14 @@ const Settings = (props) => {
 
     // bring up edit modal
     const [isUpdating, setIsUpdating] = useState(false)
+
+    const [dob, setDob] = useState()
+
+    useEffect(()=> {
+        let date = new Date(userInfo?.dateOfBirth)
+        date = format(date, "dd MMM yyyy")
+        setDob(date)
+    }, [])
 
 
     // close modal
@@ -22,6 +31,7 @@ const Settings = (props) => {
                 userInfo={userInfo}
                 closeModal={() => {closeModal()}}
                 handleDetailsUpdate={() => props.handleDetailsUpdate()}
+                dateOfBirthObj={userInfo?.dateOfBirth}
             />}
 
             <div className="px-8 pt-16 pb-8 mt-24 rounded-4xl shadow-md bg-gradient-to-b from-white to-[#f2fff9] min-w-96 max-w-[700px]">
@@ -32,7 +42,7 @@ const Settings = (props) => {
                     <p>Username: {userInfo.username}</p>
                     <p>Email: {userInfo.email}</p>
                     <p>Name: {userInfo.firstName} {userInfo.lastName}</p>
-                    <p>Date of birth: {userInfo?.dateOfBirth}</p>
+                    <p>Date of birth: {dob}</p>
                     <p>Height: {userInfo?.height} {userInfo?.height && "cm"}</p>
                     <p>Weight: {userInfo?.weight} {userInfo?.weight && "kg"}</p>
                 <button className="px-4 py-2 mt-8 mx-auto rounded-full bg-slate-900 hover:bg-slate-700 text-slate-200" onClick={() => {setIsUpdating(true)}}>Update details</button>

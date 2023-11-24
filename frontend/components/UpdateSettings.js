@@ -1,6 +1,7 @@
-import { set } from "date-fns";
+
 import React, { useEffect, useState } from "react";
 import apiClient from "@/apiClient";
+import format from "date-fns/format";
 
 const UpdateSettings = (props) => {
     // states for each of the inputs
@@ -12,6 +13,14 @@ const UpdateSettings = (props) => {
     const [height, setHeight] = useState();
     const [weight, setWeight] = useState();
     const [avatar, setAvatar] = useState();
+
+    const [initialDob, setInitialDob] = useState()
+
+    useEffect(() => {
+        let dob = new Date(props.userInfo.dateOfBirth)
+        dob = format(dob, "dd/MM/yyyy")
+        setInitialDob(dob)
+    }, [])
 
     // handle submit
     const [userNewData, setUserNewData] = useState({});
@@ -138,7 +147,7 @@ const UpdateSettings = (props) => {
                                 name=""
                                 className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={
-                                    props.userInfo.dateOfBirth || "dd/mm/yyyy"
+                                    initialDob || "dd/mm/yyyy"
                                 }
                                 onChange={(e) => {
                                     setDateOfBirth(
@@ -180,21 +189,7 @@ const UpdateSettings = (props) => {
                                 }}
                             />
                         </li>
-                        <li className="grid grid-cols-4 p-1">
-                            <label htmlFor="" className="font-bold">
-                                Avatar:{" "}
-                            </label>
-                            <input
-                                type="text"
-                                id=""
-                                name=""
-                                className="col-span-3 px-2 py-1 rounded-md"
-                                placeholder={props.userInfo.avatar}
-                                onChange={(e) => {
-                                    setAvatar(e.target.value);
-                                }}
-                            />
-                        </li>
+                        
                     </ul>
                     <br />
                     <div className="flex justify-between px-4 py-3">
