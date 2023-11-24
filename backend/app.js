@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser")
 
 app.use(
     cors({
-        origin: ["https://mern-exercise-tracker-7fu9.vercel.app/"],
+        origin: ["https://mern-exercise-tracker-7fu9.vercel.app"],
         methods: ["GET", "POST", "DELETE", "PATCH"],
         credentials: true
     })
