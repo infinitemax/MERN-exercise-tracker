@@ -2,6 +2,8 @@ import axios from "axios";
 
 const url = process.env.NEXT_PUBLIC_API_ENDPOINT || "http://localhost:3001";
 
+// cut from the url line, add back for local use: 
+
 // this line adds the JWT to our cookies.
 // axios.defaults.withCredentials = true
 

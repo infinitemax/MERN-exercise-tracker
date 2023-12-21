@@ -46,9 +46,9 @@ export default function Login(props) {
 
       // if the login fails, send a pop up message
       } else {
-        
+        console.log(response)
         // make message sentence case.
-        let alert = response.response.data.message
+        let alert = response.data.message
         alert = alert.split('')[0].toUpperCase() + alert.slice(1)
         await setMessage(alert);
         
