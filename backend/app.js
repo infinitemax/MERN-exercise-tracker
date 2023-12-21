@@ -9,7 +9,7 @@ const createError = require("http-errors");
 const userRoutes = require("./routes/userRoutes")
 const cookieParser = require("cookie-parser")
 
-// "https://mern-exercise-tracker-7fu9.vercel.app" || 
+// "https://mern-exercise-tracker-7fu9.vercel.app"
 
 app.use(
     cors({
