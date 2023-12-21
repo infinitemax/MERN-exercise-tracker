@@ -9,10 +9,11 @@ const createError = require("http-errors");
 const userRoutes = require("./routes/userRoutes")
 const cookieParser = require("cookie-parser")
 
+// "https://mern-exercise-tracker-7fu9.vercel.app" || 
 
 app.use(
     cors({
-        origin: ["https://mern-exercise-tracker-7fu9.vercel.app"],
+        origin: ["http://localhost:3002"],
         methods: ["GET", "POST", "DELETE", "PATCH"],
         credentials: true
     })

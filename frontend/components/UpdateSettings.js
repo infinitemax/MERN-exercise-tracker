@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import apiClient from "@/apiClient";
 import format from "date-fns/format";
@@ -14,13 +13,15 @@ const UpdateSettings = (props) => {
     const [weight, setWeight] = useState();
     const [avatar, setAvatar] = useState();
 
-    const [initialDob, setInitialDob] = useState()
+    const [initialDob, setInitialDob] = useState();
 
     useEffect(() => {
-        let dob = new Date(props.userInfo.dateOfBirth)
-        dob = format(dob, "dd/MM/yyyy")
-        setInitialDob(dob)
-    }, [])
+        if (userInfo.dateOfBirth) {
+            let dob = new Date(props.userInfo.dateOfBirth);
+            dob = format(dob, "dd/MM/yyyy");
+            setInitialDob(dob);
+        }
+    }, []);
 
     // handle submit
     const [userNewData, setUserNewData] = useState({});
@@ -146,9 +147,7 @@ const UpdateSettings = (props) => {
                                 id=""
                                 name=""
                                 className="col-span-3 px-2 py-1 rounded-md"
-                                placeholder={
-                                    initialDob || "dd/mm/yyyy"
-                                }
+                                placeholder={initialDob || "dd/mm/yyyy"}
                                 onChange={(e) => {
                                     setDateOfBirth(
                                         new Date(e.target.value).toLocaleString(
@@ -189,7 +188,6 @@ const UpdateSettings = (props) => {
                                 }}
                             />
                         </li>
-                        
                     </ul>
                     <br />
                     <div className="flex justify-between px-4 py-3">
@@ -198,7 +196,7 @@ const UpdateSettings = (props) => {
                                 clickCount < 2
                                     ? "bg-teal-500 hover:bg-teal-600"
                                     : "bg-red-400 text-white hover:bg-red-500"
-                            } rounded-full py-2 px-4 mr-2`} 
+                            } rounded-full py-2 px-4 mr-2`}
                         >
                             {clickCount < 2 ? "Submit" : "Sure?"}
                         </button>
