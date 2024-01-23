@@ -16,7 +16,7 @@ const UpdateSettings = (props) => {
     const [initialDob, setInitialDob] = useState();
 
     useEffect(() => {
-        if (userInfo.dateOfBirth) {
+        if (props.userInfo.dateOfBirth) {
             let dob = new Date(props.userInfo.dateOfBirth);
             dob = format(dob, "dd/MM/yyyy");
             setInitialDob(dob);
@@ -138,7 +138,7 @@ const UpdateSettings = (props) => {
                                 }}
                             />
                         </li>
-                        <li className="grid grid-cols-4 p-1">
+                        {/* <li className="grid grid-cols-4 p-1">
                             <label htmlFor="" className="font-bold">
                                 Date of birth:{" "}
                             </label>
@@ -149,12 +149,28 @@ const UpdateSettings = (props) => {
                                 className="col-span-3 px-2 py-1 rounded-md"
                                 placeholder={initialDob || "dd/mm/yyyy"}
                                 onChange={(e) => {
-                                    setDateOfBirth(
-                                        new Date(e.target.value).toLocaleString(
+                                    let birth = new Date(e.target.value).toLocaleString(
                                             "en-GB",
-                                            { timeZone: "Europe/London" }
-                                        )
-                                    );
+                                            { timeZone: "Europe/London" })
+                                    console.log(birth)
+                                    setDateOfBirth(birth);
+                                }}
+                            />
+                        </li> */}
+                        <li className="grid grid-cols-4 p-1">
+                            <label htmlFor="" className="font-bold">
+                                Date of birth:{" "}
+                            </label>
+                            <input
+                                type="date"
+                                id=""
+                                name=""
+                                className="col-span-3 px-2 py-1 rounded-md"
+                                // placeholder={initialDob || "dd/mm/yyyy"}
+                                onChange={(e) => {
+                                    let birth = new Date(e.target.value)
+                                    console.log(birth)
+                                    setDateOfBirth(birth);
                                 }}
                             />
                         </li>

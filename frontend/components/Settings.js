@@ -20,6 +20,7 @@ const Settings = (props) => {
     }, [])
 
 
+
     // close modal
     const closeModal = () => {
         return setIsUpdating(false)

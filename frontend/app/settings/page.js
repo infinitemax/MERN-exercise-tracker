@@ -55,7 +55,6 @@ export default function MyAreaPage() {
     }, [updateDetails])
 
 
-
     return (
         <div>
             {isLoading && <h2>Loading...</h2>}
