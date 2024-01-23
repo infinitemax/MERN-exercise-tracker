@@ -20,7 +20,6 @@ const Settings = (props) => {
     }, [])
 
 
-
     // close modal
     const closeModal = () => {
         return setIsUpdating(false)
@@ -43,7 +42,9 @@ const Settings = (props) => {
                     <p>Username: {userInfo.username}</p>
                     <p>Email: {userInfo.email}</p>
                     <p>Name: {userInfo.firstName} {userInfo.lastName}</p>
-                    <p>Date of birth: {dob}</p>
+                    <p>Date of birth: {    
+                        format(new Date(userInfo?.dateOfBirth), "dd MMM yyyy")
+                    }</p>
                     <p>Height: {userInfo?.height} {userInfo?.height && "cm"}</p>
                     <p>Weight: {userInfo?.weight} {userInfo?.weight && "kg"}</p>
                 <button className="px-4 py-2 mt-8 mx-auto rounded-full bg-slate-900 hover:bg-slate-700 text-slate-200" onClick={() => {setIsUpdating(true)}}>Update details</button>

@@ -169,7 +169,6 @@ const UpdateSettings = (props) => {
                                 // placeholder={initialDob || "dd/mm/yyyy"}
                                 onChange={(e) => {
                                     let birth = new Date(e.target.value)
-                                    console.log(birth)
                                     setDateOfBirth(birth);
                                 }}
                             />
