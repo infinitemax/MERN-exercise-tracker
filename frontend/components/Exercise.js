@@ -29,7 +29,7 @@ const Exercise = () => {
                           </div>
                           <div className="flex flex-col mt-6">
                               <div className="mb-1 text-gray-600">Instructions:</div>
-                              <div className="font-semibold capitalize">{selectedExercise.instructions}</div>
+                              <div className="">{selectedExercise.instructions}</div>
                           </div>
                       </div>
                   </div>
