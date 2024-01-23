@@ -15,10 +15,6 @@ const GoalsDashboard = (props) => {
         setIsAddingGoal(!isAddingGoal)
     }
 
-    // get user's goals
-    goals.forEach(goal => {
-        console.log("hi there");
-        console.log(goal)})
 
     const deleteGoalHandler = async (id) => {
         await goalsApiClinet.deleteGoal(id)

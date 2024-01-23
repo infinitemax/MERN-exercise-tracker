@@ -111,25 +111,26 @@ export default function Login(props) {
               loginHandler(e);
             }}
           >
-            <div className="my-2">
-              <label htmlFor="username">Username: </label>
-              <input
-                className="text-slate-700"
-                type="text"
-                placeholder="Username"
-                name="username"
-                onChange={(e) => setUsername(e.target.value)}
-              ></input>
-            </div>
-            <div className="my-2">
-              <label htmlFor="password">Password: </label>
-              <input
-                className="text-slate-700"
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
+            <div className="flex justify-center p-2">
+              <div className="my-2 w-[300px] grid grid-cols-12 gap-3">
+                <label htmlFor="username" className="text-left col-span-4">Username: </label>
+                <input
+                  className="text-slate-700 col-span-8 rounded-md px-2"
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                ></input>
+
+                <label htmlFor="password" className="text-left col-span-4">Password: </label>
+                <input
+                  className="text-slate-700 col-span-8 rounded-md px-2"
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
+              </div>
             </div>
             <button className="px-6 py-1 my-2 bg-green-600 rounded-md">
               Enter

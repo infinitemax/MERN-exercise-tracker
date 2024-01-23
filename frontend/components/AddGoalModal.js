@@ -28,7 +28,7 @@ const AddGoalModal = (props) => {
             goalPeriod,
         });
         setSaveGoal(false);
-        await props.handleGoalsUpdate();
+        props.handleGoalsUpdate();
         props.toggleGoalModal();
         
     };

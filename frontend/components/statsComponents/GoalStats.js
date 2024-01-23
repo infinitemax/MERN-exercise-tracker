@@ -6,6 +6,8 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 
 const GoalStats = (props) => {
+
+
     const [goals, setGoals] = useState("");
     const [loading, setLoading] = useState(true);
     const [goalStrings, setGoalStrings] = useState([]);
@@ -63,6 +65,7 @@ const GoalStats = (props) => {
         }
     };
 
+
     return (
         <div className="p-6 font-light  rounded-lg bg-gradient-to-b from-white to-[#f2fff9] shadow-md border-slate-700 w-96 text-slate-200">
             <h3 className="pb-2 text-3xl text-emerald-400">Your goals</h3>
@@ -85,6 +88,8 @@ const GoalStats = (props) => {
                         </div>
                     </div>
                     <hr className="h-1 my-1 border-0 rounded bg-slate-600" />
+
+                    {goals.total === 0 ? <p className="text-slate-700 pt-4">You currently have no goals! <a href="/goals" className="underline">Click here to set some</a>.</p> : null}
 
                     {goals.goalsWithCompletion.map((goal, index) => {
                         return (

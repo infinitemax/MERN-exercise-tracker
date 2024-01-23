@@ -32,7 +32,7 @@ export default function goals() {
 
             setUserInfo(response.data.user)
             setIsLoading(false);
-            setUpdateGoals(!updateGoals)
+           
             return
 
         } catch(error) {
