@@ -28,7 +28,7 @@ const Exercise = () => {
                               <div className="font-semibold capitalize">{selectedExercise.muscle}</div>
                           </div>
                           <div className="flex flex-col mt-6">
-                              <div className="mb-1 text-gray-600">Instructions:</div>
+                              
                               <div className="">{selectedExercise.instructions}</div>
                           </div>
                       </div>
